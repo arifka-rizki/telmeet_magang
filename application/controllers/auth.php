@@ -13,7 +13,7 @@ class auth extends CI_Controller {
 	public function index()
 	{
         $this->load->view('templates/header');
-        $this->load->view('login');
+        $this->load->view('v_login');
         $this->load->view('templates/footer');
     }
     
@@ -23,7 +23,7 @@ class auth extends CI_Controller {
 
         if($this->form_validation->run()==false){
             $this->load->view('templates/header');
-            $this->load->view('login');
+            $this->load->view('v_login');
             $this->load->view('templates/footer');
         } else{
             $nik = $this->input->post('nik');
@@ -51,5 +51,11 @@ class auth extends CI_Controller {
     public function logout(){
         $this->session->sess_destroy();
         redirect(base_url("auth"));
+    }
+
+    public function external(){
+        $this->load->view('templates/header');
+        $this->load->view('v_external');
+        $this->load->view('templates/footer');
     }
 }

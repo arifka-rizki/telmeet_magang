@@ -1,6 +1,3 @@
-    <!-- Custom styles for this template -->
-  </head>
-
   <body class="bg-light">
     <div class="container shadow-sm p-0">
       <nav class="navbar navbar-expand-lg navbar-light bg-white">

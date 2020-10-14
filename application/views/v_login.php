@@ -1,6 +1,3 @@
-    <!-- Custom styles for this template -->
-  </head>
-
   <body class="bg-light">
     <div class="container">
       <div class="row justify-content-center pt-5 mt-5">
@@ -43,7 +40,7 @@
             <p class="text-center my-4">Atau</p>
 
             <a
-              href="profil.html"
+              href="<?php echo base_url('auth/external'); ?>"
               class="btn btn-outline-danger btn-lg btn-block"
               >Peserta Eksternal</a
             >
