@@ -19,6 +19,8 @@
       crossorigin="anonymous"
     ></script>
 
+    <script src="<?php echo base_url('js/datatables/dataTables.bootstrap.js') ?>"></script>
+
     <script>
       // Example starter JavaScript for disabling form submissions if there are invalid fields
       (function () {

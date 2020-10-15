@@ -29,10 +29,10 @@ class auth extends CI_Controller {
             $nik = $this->input->post('nik');
             $password = $this->input->post('password');
             $where = array(
-                'nik' => $nik,
-                'password' => $password
+                'NIK' => $nik,
+                'PASSWORD' => $password
             );
-            $check = $this -> m_login->check_login("user", $where)->num_rows();
+            $check = $this -> m_login->check_login("tb_users", $where)->num_rows();
             if($check > 0){
                 $data_session=array(
                     'nik' => $nik,
