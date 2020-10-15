@@ -6,8 +6,8 @@
           </h3>
         </div>
         <div class="row p-3 shadow-sm rounded bg-white my-3">
-          <a href="berandapic.html" class="btn btn-danger">Penanggung Jawab</a>
-          <a href="" class="btn btn-outline-danger">Undangan</a>
+          <a href="<?php echo base_url('meetpic'); ?>" class="btn btn-danger">Penanggung Jawab</a>
+          <a href="<?php echo base_url('meetinv'); ?>" class="btn btn-outline-danger">Undangan</a>
         </div>
 
         <div class="row justify-content-center pt-1 shadow-sm rounded bg-white">
@@ -24,35 +24,43 @@
                   <tbody>
                     <tr>
                       <th>Judul Rapat</th>
-                      <td>Perencanaan RAB</td>
+                      <td><?php echo $NAMA_RAPAT;?></td>
                     </tr>
                     <tr>
                       <th>Tipe Rapat</th>
-                      <td>Pengambilan Keputusan</td>
+                      <td><?php echo $TIPE_RAPAT;?></td>
                     </tr>
                     <tr>
                       <th>Pengundang Rapat</th>
-                      <td>Roy Sasongko</td>
+                      <td><?php echo $PENGUNDANG;?></td>
                     </tr>
                     <tr>
                       <th>Tanggal</th>
-                      <td>01/01/2020</td>
+                      <td><?php echo $TANGGAL;?></td>
                     </tr>
                     <tr>
                       <th>Waktu</th>
-                      <td>09:09 AM</td>
+                      <td><?php echo $WAKTU_MULAI;?></td>
                     </tr>
                     <tr>
                       <th>Notulen</th>
-                      <td>Bagus Tri</td>
+                      <td><?php echo $NOTULEN;?></td>
                     </tr>
                     <tr>
                       <th>Penandatangan Rapat</th>
-                      <td>Sasongko, Ole Ole, Gembus,</td>
+                      <td><?php echo $PENANDATANGAN;?></td>
                     </tr>
                     <tr>
                       <th>Lokasi Rapat</th>
-                      <td>https://meet.google.com/sdaisd-asdas-as</td>
+                      <td><?php echo $TEMPAT;?></td>
+                    </tr>
+                    <tr>
+                      <th>Nota Dinas</th>
+                      <td><?php echo $NOTA_DINAS;?></td>
+                    </tr>
+                    <tr>
+                      <th>Lokasi Rapat</th>
+                      <td><?php echo $TEMPAT;?></td>
                     </tr>
                   </tbody>
                 </table>
