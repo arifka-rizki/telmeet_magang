@@ -6,19 +6,20 @@ class auth extends CI_Controller {
     public function __construct()
     {
         parent::__construct();
-        $this->load->library(array('form_validation', 'session'));
         $this->load->model('m_login');
     }
 
 	public function index()
 	{
-        $this->load->view('templates/header');
+        $data['page_title'] = 'TelkomMeet';
+
+        $this->load->view('templates/header', $data);
         $this->load->view('v_login');
         $this->load->view('templates/footer');
     }
     
     public function login_action(){
-        $this->form_validation->set_rules('nik', 'NIK', 'required|numeric');
+        $this->form_validation->set_rules('nik', 'NIK', 'required|numeric'); //add exact length
         $this->form_validation->set_rules('password', 'Password', 'required');
 
         if($this->form_validation->run()==false){
@@ -54,7 +55,9 @@ class auth extends CI_Controller {
     }
 
     public function external(){
-        $this->load->view('templates/header');
+        $data['page_title'] = 'Presensi Eksternal';
+
+        $this->load->view('templates/header', $data);
         $this->load->view('v_external');
         $this->load->view('templates/footer');
     }

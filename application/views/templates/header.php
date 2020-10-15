@@ -10,8 +10,10 @@
     <meta name="author" content="" />
     <link rel="icon" href="/docs/4.0/assets/img/favicons/favicon.ico" />
     
-    <title>Login - TelkomMeet</title>
+    <title><?php if(!empty($page_title)) echo $page_title;?> </title>
 
+    <!-- Font Awesome -->
+    <script src="https://kit.fontawesome.com/e87ebb70cc.js" crossorigin="anonymous"></script>
     <!-- Bootstrap core CSS -->
     <link
       rel="stylesheet"

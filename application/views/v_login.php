@@ -15,7 +15,6 @@
                 required
                 name="nik"
               />
-              <div class="invalid-feedback">Tolong masukkan NIK.</div>
             </div>
 
             <div class="mb-3">

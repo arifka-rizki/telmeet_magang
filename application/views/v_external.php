@@ -14,7 +14,7 @@
               <div class="row">
                 <div class="col-md-6 px-3">
                   <div class="mb-3">
-                    <form class="needs-validation" novalidate>
+                    <form class="needs-validation" novalidate method="POST">
                       <div class="mb-4">
                         <label for="kodeRapat"><b>Kode Rapat</b></label>
                         <input
@@ -24,6 +24,7 @@
                           placeholder=""
                           value=""
                           required
+                          name="kodeRapat"
                         />
                       </div>
 
@@ -46,6 +47,7 @@
                       id="detailRapat"
                       cols="30"
                       rows="10"
+                      readonly
                     ></textarea>
                   </div>
                 </div>
@@ -61,7 +63,7 @@
             <div class="row px-3 py-3">
               <h4><b>Identitas Peserta</b></h4>
             </div>
-            <form class="needs-validation" novalidate>
+            <form class="needs-validation" novalidate method="POST" action="<?php echo base_url('external/presensi'); ?>">
               <div class="row">
                 <div class="col-md-6 px-3">
                   <div class="mb-3">
@@ -73,6 +75,7 @@
                       placeholder=""
                       value=""
                       required
+                      name="nama"
                     />
                   </div>
 
@@ -84,6 +87,7 @@
                       id="nik"
                       placeholder=""
                       required
+                      name="nik"
                     />
                   </div>
 
@@ -97,6 +101,9 @@
                         class="custom-control-input"
                         required
                       />
+                      <label class="custom-control-label" for="laki"
+                        >Laki-laki
+                      </label>
                     </div>
                     <div class="custom-control custom-radio">
                       <input
@@ -120,6 +127,7 @@
                       id="instansi"
                       placeholder=""
                       required
+                      name="instansi"
                     />
                   </div>
 
@@ -131,6 +139,7 @@
                       id="jabatan"
                       placeholder=""
                       required
+                      name="jabatan"
                     />
                   </div>
                 </div>
@@ -144,6 +153,7 @@
                       id="telefon"
                       placeholder=""
                       required
+                      name="telefon"
                     />
                   </div>
 
@@ -155,6 +165,7 @@
                       id="email"
                       placeholder=""
                       required
+                      name="email"
                     />
                   </div>
 
@@ -166,6 +177,7 @@
                       id="buktiKehadiran"
                       placeholder=""
                       required
+                      name="buktiKehadiran"
                     />
                   </div>
                 </div>
