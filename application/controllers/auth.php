@@ -41,7 +41,7 @@ class auth extends CI_Controller {
 
                 $this->session->set_userdata($data_session);
 
-                redirect(base_url("dashboard"));
+                redirect(base_url("meetpic"));
             } else{
                 echo "nik dan pass salah";
             }
