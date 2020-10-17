@@ -87,7 +87,7 @@
                         </a>
                       </td>
                       <td>
-                        <a href="ubah.html">
+                        <a href="<?php echo base_url('meetpic/update').'/'.$val->ID_RAPAT ?>">
                           <button class="btn btn-outline-danger px-2 py-1">
                             <i class="fas fa-wrench"></i>
                           </button>

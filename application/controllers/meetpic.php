@@ -18,7 +18,7 @@ class meetpic extends CI_Controller {
     }
 
     public function index(){
-        $data['data']=$this->m_rapat->get_all();
+        $data['data']=$this->m_rapat->get_by_pic($this->session->userdata("nik"));
         $this->load->view('templates/header');
         $this->load->view('templates/navbar');
         $this->load->view('v_dashboardpic',$data);
@@ -78,7 +78,7 @@ class meetpic extends CI_Controller {
         		'TEMPAT' => $this->input->post('TEMPAT',TRUE),
                 'TIPE_RAPAT' => $this->input->post('TIPE_RAPAT',TRUE),
                 'NOTULEN' => $this->input->post('NOTULEN',TRUE),
-                'STATUS' => $this->input->post('STATUS',TRUE),
+                'STATUS' => "0",
                 'PENANDATANGAN' => $this->input->post('PENANDATANGAN',TRUE),
         		'PENGUNDANG' => $this->input->post('PENGUNDANG',TRUE),
         		'NOTA_DINAS' => $this->input->post('NOTA_DINAS',TRUE),
@@ -99,21 +99,21 @@ class meetpic extends CI_Controller {
             $data = array(
                 'button' => 'Edit Rapat',
                 'action' => site_url('meetpic/update_action'),
-        		'ID_RAPAT' => set_value('ID_RAPAT', $row->ID_RAPAT),
-        		'NIK_PIC' => set_value('NIK_PIC', $row->NIK_PIC),
-                'KODE_RAPAT' => set_value('KODE_RAPAT', $row->KODE_RAPAT),
-                'NAMA_RAPAT' => set_value('NAMA_RAPAT', $row->NAMA_RAPAT),
-                'TANGGAL' => set_value('TANGGAL', $row->TANGGAL),
-                'WAKTU_MULAI' => set_value('WAKTU_MULAI', $row->WAKTU_MULAI),
-                'WAKTU_SELESAI' => set_value('WAKTU_SELESAI', $row->WAKTU_SELESAI),
-                'TEMPAT' => set_value('TEMPAT', $row->TEMPAT),
-                'TIPE_RAPAT' => set_value('TIPE_RAPAT', $row->TIPE_RAPAT),
-                'NOTULEN' => set_value('NOTULEN', $row->NOTULEN),
-                'STATUS' => set_value('STATUS', $row->STATUS),
-                'PENANDATANGAN' => set_value('PENANDATANGAN', $row->PENANDATANGAN),
-                'PENGUNDANG' => set_value('PENGUNDANG', $row->PENGUNDANG),
-                'NOTA_DINAS' => set_value('NOTA_DINAS', $row->NOTA_DINAS),
-                'NOTULENSI' => set_value('NOTULENSI', $row->NOTULENSI),
+        		'ID_RAPAT' => $row->ID_RAPAT,
+        		'NIK_PIC' => $row->NIK_PIC,
+                'KODE_RAPAT' => $row->KODE_RAPAT,
+                'NAMA_RAPAT' => $row->NAMA_RAPAT,
+                'TANGGAL' => $row->TANGGAL,
+                'WAKTU_MULAI' => $row->WAKTU_MULAI,
+                'WAKTU_SELESAI' => $row->WAKTU_SELESAI,
+                'TEMPAT' => $row->TEMPAT,
+                'TIPE_RAPAT' => $row->TIPE_RAPAT,
+                'NOTULEN' => $row->NOTULEN,
+                'STATUS' => $row->STATUS,
+                'PENANDATANGAN' => $row->PENANDATANGAN,
+                'PENGUNDANG' => $row->PENGUNDANG,
+                'NOTA_DINAS' => $row->NOTA_DINAS,
+                'NOTULENSI' => $row->NOTULENSI,
             );
             
             $this->load->view('templates/header');
@@ -131,12 +131,12 @@ class meetpic extends CI_Controller {
     
     public function update_action() 
     {
-        $this->_rules();
+        //$this->_rules();
 
-        if ($this->form_validation->run() == FALSE) {
-            $this->update($this->input->post('ID_RAPAT', TRUE));
-        } else {
-            $data['data'] = array(
+        //if ($this->form_validation->run() == FALSE) {
+        //    $this->update($this->input->post('ID_RAPAT', TRUE));
+        //} else {
+            $data['update'] = array(
         		'NIK_PIC' => $this->session->userdata("nik"),
         		'KODE_RAPAT' => $this->input->post('KODE_RAPAT',TRUE),
         		'NAMA_RAPAT' => $this->input->post('NAMA_RAPAT',TRUE),
@@ -146,17 +146,18 @@ class meetpic extends CI_Controller {
         		'TEMPAT' => $this->input->post('TEMPAT',TRUE),
                 'TIPE_RAPAT' => $this->input->post('TIPE_RAPAT',TRUE),
                 'NOTULEN' => $this->input->post('NOTULEN',TRUE),
-                'STATUS' => $this->input->post('STATUS',TRUE),
+                'STATUS' => "0",
                 'PENANDATANGAN' => $this->input->post('PENANDATANGAN',TRUE),
         		'PENGUNDANG' => $this->input->post('PENGUNDANG',TRUE),
         		'NOTA_DINAS' => $this->input->post('NOTA_DINAS',TRUE),
                 'NOTULENSI' => $this->input->post('NOTULENSI',TRUE),
-    	    );
+            );
 
             $this->m_rapat->update($this->input->post('ID_RAPAT', TRUE), $data);
             $this->session->set_flashdata('message', 'Update Record Success');
+            //echo implode (",", $data['update']);
             redirect(site_url('meetpic'));
-        }
+        //}
     }
     
     public function delete($id) 
@@ -199,20 +200,21 @@ class meetpic extends CI_Controller {
         
         if ($row) {
             $data = array(
-                'ID_RAPAT' => $row->ID_RAPAT,
-                'KODE_RAPAT' => $row->KODE_RAPAT,
-        		'NIK_PIC' => $row->NIK_PIC,
-        		'TANGGAL' => $row->TANGGAL,
-        		'WAKTU_MULAI' => $row->WAKTU_MULAI,
-        		'WAKTU_SELESAI' => $row->WAKTU_SELESAI,
-        		'TEMPAT' => $row->TEMPAT,
-        		'TIPE_RAPAT' => $row->TIPE_RAPAT,
-        		'PENGUNDANG' => $row->PENGUNDANG,
-        		'NOTA_DINAS' => $row->NOTA_DINAS,
-        		'STATUS' => $row->STATUS,
-        		'PESERTA' => $row->PESERTA,
-                'NOTULEN' => $row->NOTULEN,
-                'PENANDATANGAN' => $row->PENANDATANGAN,
+                'ID_RAPAT' => set_value('ID_RAPAT', $row->ID_RAPAT),
+        		'NIK_PIC' => set_value('NIK_PIC', $row->NIK_PIC),
+                'KODE_RAPAT' => set_value('KODE_RAPAT', $row->KODE_RAPAT),
+                'NAMA_RAPAT' => set_value('NAMA_RAPAT', $row->NAMA_RAPAT),
+                'TANGGAL' => set_value('TANGGAL', $row->TANGGAL),
+                'WAKTU_MULAI' => set_value('WAKTU_MULAI', $row->WAKTU_MULAI),
+                'WAKTU_SELESAI' => set_value('WAKTU_SELESAI', $row->WAKTU_SELESAI),
+                'TEMPAT' => set_value('TEMPAT', $row->TEMPAT),
+                'TIPE_RAPAT' => set_value('TIPE_RAPAT', $row->TIPE_RAPAT),
+                'NOTULEN' => set_value('NOTULEN', $row->NOTULEN),
+                'STATUS' => set_value('STATUS', $row->STATUS),
+                'PENANDATANGAN' => set_value('PENANDATANGAN', $row->PENANDATANGAN),
+                'PENGUNDANG' => set_value('PENGUNDANG', $row->PENGUNDANG),
+                'NOTA_DINAS' => set_value('NOTA_DINAS', $row->NOTA_DINAS),
+                'NOTULENSI' => set_value('NOTULENSI', $row->NOTULENSI),
 	        );
             $this->load->view('templates/header');
             $this->load->view('templates/navbar');

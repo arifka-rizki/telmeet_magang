@@ -9,6 +9,7 @@ class m_rapat extends CI_Model
     public $table = 'tb_rapat';
     public $id = 'ID_RAPAT';
     public $order = 'DESC';
+    public $pic = 'NIK_PIC';
 
     function __construct()
     {
@@ -29,6 +30,14 @@ class m_rapat extends CI_Model
     function get_all()
     {
         $this->db->order_by($this->id, $this->order);
+        return $this->db->get($this->table)->result();
+    }
+
+    function get_by_pic($pic)
+    {
+        $this->db->where($this->pic, $pic);
+        $this->db->where('STATUS', '0');
+        $this->db->order_by('TANGGAL', 'ASC');
         return $this->db->get($this->table)->result();
     }
 
@@ -101,11 +110,7 @@ class m_rapat extends CI_Model
     // update data
     function update($id, $data)
     {
-
-        $this->db->where($this->id, $id)->update($this->table, $data['data']);
-
-        //$this->db->where($this->id, $id)->delete($this->table_fasilitas);
-           
+        $this->db->where($this->id, $id)->update($this->table, $data['update']);           
     }
 
     // delete data
