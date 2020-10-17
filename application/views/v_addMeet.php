@@ -9,7 +9,7 @@
             <div class="row px-3 py-2">
               <h4><b>Rapat</b></h4>
             </div>
-            <form class="needs-validation" novalidate>
+            <form method="post" action="<?php echo $action; ?>" class="needs-validation" novalidate>
               <div class="row">
                 <div class="col-md-6 px-3">
                   <div class="mb-3">
@@ -18,8 +18,9 @@
                       type="text"
                       class="form-control"
                       id="judulRapat"
+                      name="NAMA_RAPAT"
                       placeholder=""
-                      value=""
+                      value="<?php echo $NAMA_RAPAT; ?>"
                       required
                     />
                     <div class="invalid-feedback">
@@ -32,9 +33,10 @@
                     <div class="custom-control custom-radio">
                       <input
                         id="review"
-                        name="tipeRapat"
+                        name="TIPE_RAPAT"
                         type="radio"
                         class="custom-control-input"
+                        value="Review" <?php if ( $TIPE_RAPAT=="Review") echo "selected" ?> 
                         required
                       />
                       <label class="custom-control-label" for="review"
@@ -44,9 +46,10 @@
                     <div class="custom-control custom-radio">
                       <input
                         id="koordinasi"
-                        name="tipeRapat"
+                        name="TIPE_RAPAT"
                         type="radio"
                         class="custom-control-input"
+                        value="Koordinasi" <?php if ( $TIPE_RAPAT=="Koordinasi") echo "selected" ?>
                         required
                       />
                       <label class="custom-control-label" for="koordinasi"
@@ -56,9 +59,10 @@
                     <div class="custom-control custom-radio">
                       <input
                         id="briefing"
-                        name="tipeRapat"
+                        name="TIPE_RAPAT"
                         type="radio"
                         class="custom-control-input"
+                        value="Briefing" <?php if ( $TIPE_RAPAT=="Briefing") echo "selected" ?>
                         required
                       />
                       <label class="custom-control-label" for="briefing"
@@ -68,9 +72,10 @@
                     <div class="custom-control custom-radio">
                       <input
                         id="decision"
-                        name="tipeRapat"
+                        name="TIPE_RAPAT"
                         type="radio"
                         class="custom-control-input"
+                        value="Decision Making" <?php if ( $TIPE_RAPAT=="Decision Making") echo "selected" ?>
                         required
                       />
                       <label class="custom-control-label" for="decision"
@@ -80,9 +85,10 @@
                     <div class="custom-control custom-radio">
                       <input
                         id="other"
-                        name="tipeRapat"
+                        name="TIPE_RAPAT"
                         type="radio"
                         class="custom-control-input"
+                        value="Other" <?php if ( $TIPE_RAPAT=="Other") echo "selected" ?>
                         required
                       />
                       <label class="custom-control-label" for="other"
@@ -97,7 +103,9 @@
                       type="text"
                       class="form-control"
                       id="pengundang"
+                      name="PENGUNDANG"
                       placeholder=""
+                      value="<?php echo $PENGUNDANG; ?>"
                       required
                     />
                     <div class="invalid-feedback">
@@ -115,8 +123,9 @@
                       max="2030-01-01"
                       class="form-control"
                       id="tanggal"
+                      name="TANGGAL"
                       placeholder=""
-                      value=""
+                      value="<?php echo $TANGGAL; ?>"
                       required
                     />
                     <div class="invalid-feedback">
@@ -133,8 +142,9 @@
                         max="24-00-00"
                         class="form-control"
                         id="wakruMulai"
+                        name="WAKTU_MULAI"
                         placeholder=""
-                        value=""
+                        value="<?php echo $WAKTU_MULAI; ?>"
                         required
                       />
                       <div class="invalid-feedback">
@@ -149,8 +159,9 @@
                         max="24-00-00"
                         class="form-control"
                         id="waktuSelesai"
+                        name="WAKTU_SELESAI"
                         placeholder=""
-                        value=""
+                        value="<?php echo $WAKTU_SELESAI; ?>"
                         required
                       />
                       <div class="invalid-feedback">
@@ -165,8 +176,9 @@
                       type="text"
                       class="form-control"
                       id="notulen"
+                      name="NOTULEN"
                       placeholder=""
-                      value=""
+                      value="<?php echo $NOTULEN; ?>"
                       required
                     />
                     <div class="invalid-feedback">
@@ -180,8 +192,9 @@
                       type="text"
                       class="form-control"
                       id="lokasiRapat"
+                      name="TEMPAT"
                       placeholder=""
-                      value=""
+                      value="<?php echo $TEMPAT; ?>"
                       required
                     />
                     <div class="invalid-feedback">
@@ -195,8 +208,9 @@
                       type="text"
                       class="form-control"
                       id="penandatangan"
+                      name="PENANDATANGAN"
                       placeholder=""
-                      value=""
+                      value="<?php echo $PENANDATANGAN; ?>"
                       required
                     />
                     <div class="invalid-feedback">
@@ -208,11 +222,13 @@
 
               <hr class="mb-4" />
 
+              <!--<input type="hidden" name="ID_RAPAT" value="<?php echo $ID_RAPAT; ?>" /> -->
+
               <button
                 class="btn btn-danger btn-block col-md-2 mb-3 float-right"
                 type="submit"
               >
-                Tambah Rapat
+              <?php echo $button ?>
               </button>
             </form>
           </div>

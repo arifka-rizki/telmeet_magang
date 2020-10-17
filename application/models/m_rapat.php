@@ -17,7 +17,7 @@ class m_rapat extends CI_Model
 
     // datatables
     function json() {
-        $this->datatables->select('ID_rapat,KODE_RAPAT,NAMA_RAPAT,ID_PIC,TANGGAL,WAKTU_MULAI,WAKTU_SELESAI,TEMPAT,TIPE_RAPAT,PENGUNDANG,NOTA_DINAS,STATUS,PESERTA,NOTULEN');
+        $this->datatables->select('ID_rapat,KODE_RAPAT,NAMA_RAPAT,ID_PIC,TANGGAL,WAKTU_MULAI,WAKTU_SELESAI,TEMPAT,TIPE_RAPAT,PENGUNDANG,NOTA_DINAS,STATUS,PESERTA,NOTULEN,PENANDATANGAN');
         $this->datatables->from('tb_rapat');
         //add this line for join
         //$this->datatables->join('table2', 'tb_mobil.field = table2.field');
@@ -63,6 +63,7 @@ class m_rapat extends CI_Model
 	    $this->db->or_like('STATUS', $q);
         $this->db->or_like('PESERTA', $q);
         $this->db->or_like('NOTULEN', $q);
+        $this->db->or_like('PENANDATANGAN', $q);
 	    $this->db->from($this->table);
         return $this->db->count_all_results();
     }
@@ -84,25 +85,17 @@ class m_rapat extends CI_Model
 	    $this->db->or_like('STATUS', $q);
         $this->db->or_like('PESERTA', $q);
         $this->db->or_like('NOTULEN', $q);
+        $this->db->or_like('PENANDATANGAN', $q);
 	    $this->db->from($this->table);
     	$this->db->limit($limit, $start);
         return $this->db->get($this->table)->result();
     }
 
     // insert data
-    /*function insert($data)
+    function insert($data)
     {
         $this->db->insert($this->table, $data['data']);
-        $id=$this->db->insert_id();
-
-        foreach ($data["fasilitas"] as $key => $value) {
-            $data["fasilitas"][$key]["ID_MOBIL"]=$id;
-        }
-        
-        $data["photo"]["ID_MOBIL"]=$id;
-        
-        $this->db->insert_batch($this->table_fasilitas, $data["fasilitas"]);
-        $this->db->insert($this->table_gallery, $data['photo']);
+        $this->db->insert_id();
     }
 
     // update data
@@ -111,26 +104,9 @@ class m_rapat extends CI_Model
 
         $this->db->where($this->id, $id)->update($this->table, $data['data']);
 
-        $this->db->where($this->id, $id)->delete($this->table_fasilitas);
-        foreach ($data["fasilitas"] as $key => $value) {
-            $data["fasilitas"][$key]["ID_MOBIL"]=$id;
-        }
-        
-        if ($data["fasilitas"]) {
-            $this->db->insert_batch($this->table_fasilitas, $data["fasilitas"]);
-        }
-
-        if ($data["photo"]) {
-            $this->db->where($this->id, $id)->delete($this->table_gallery);
-            // $this->db->delete($this->table_gallery);
-            $data["photo"]["ID_MOBIL"]=$id;
-            $this->db->insert($this->table_gallery, $data['photo']);
-        }
-        
-    
-
-
-    }*/
+        //$this->db->where($this->id, $id)->delete($this->table_fasilitas);
+           
+    }
 
     // delete data
     function delete($id)
