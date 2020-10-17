@@ -222,7 +222,7 @@
 
               <hr class="mb-4" />
 
-              <!--<input type="hidden" name="ID_RAPAT" value="<?php echo $ID_RAPAT; ?>" /> -->
+              <input type="hidden" name="ID_RAPAT" value="<?php echo $ID_RAPAT; ?>" /> 
 
               <button
                 class="btn btn-danger btn-block col-md-2 mb-3 float-right"
