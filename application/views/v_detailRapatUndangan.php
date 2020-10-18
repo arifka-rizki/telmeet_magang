@@ -29,6 +29,10 @@
                       <td><?php echo $NAMA_RAPAT;?></td>
                     </tr>
                     <tr>
+                      <th>Nota Dinas</th>
+                      <td><?php echo $NOTA_DINAS;?></td>
+                    </tr>
+                    <tr>
                       <th>Tipe Rapat</th>
                       <td><?php echo $TIPE_RAPAT;?></td>
                     </tr>
@@ -45,6 +49,10 @@
                       <td><?php echo $WAKTU_MULAI;?></td>
                     </tr>
                     <tr>
+                      <th>Lokasi Rapat</th>
+                      <td><?php echo $TEMPAT;?></td>
+                    </tr>
+                    <tr>
                       <th>Notulen</th>
                       <td><?php echo $NOTULEN;?></td>
                     </tr>
@@ -53,16 +61,8 @@
                       <td><?php echo $PENANDATANGAN;?></td>
                     </tr>
                     <tr>
-                      <th>Lokasi Rapat</th>
-                      <td><?php echo $TEMPAT;?></td>
-                    </tr>
-                    <tr>
-                      <th>Nota Dinas</th>
-                      <td><?php echo $NOTA_DINAS;?></td>
-                    </tr>
-                    <tr>
-                      <th>Lokasi Rapat</th>
-                      <td><?php echo $TEMPAT;?></td>
+                      <th>Kode Rapat</th>
+                      <td><?php echo $KODE_RAPAT;?></td>
                     </tr>
                   </tbody>
                 </table>

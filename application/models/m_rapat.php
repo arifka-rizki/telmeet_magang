@@ -10,6 +10,8 @@ class m_rapat extends CI_Model
     public $id = 'ID_RAPAT';
     public $order = 'DESC';
     public $pic = 'NIK_PIC';
+    public $inv = 'ID_USER';
+    public $tb_peserta = 'tb_peserta_rapat';
 
     function __construct()
     {
@@ -39,6 +41,17 @@ class m_rapat extends CI_Model
         $this->db->where('STATUS', '0');
         $this->db->order_by('TANGGAL', 'ASC');
         return $this->db->get($this->table)->result();
+    }
+
+    function get_by_inv($inv)
+    {
+        $this->db->where($this->inv, $inv);
+        $this->db->where('STATUS', '0');
+        $this->db->select('*');
+        $this->db->from('tb_rapat');
+        $this->db->join('tb_peserta_rapat', 'tb_peserta_rapat.ID_RAPAT=tb_rapat.ID_RAPAT','inner');
+        $this->db->order_by('TANGGAL', 'ASC');
+        return $this->db->get()->result();
     }
 
     /* get data avalilable car
@@ -117,7 +130,8 @@ class m_rapat extends CI_Model
     function delete($id)
     {
         $this->db->where($this->id, $id);
-        $this->db->delete($this->table);
+        $this->db->set('STATUS','1');
+        $this->db->update($this->table);
     }
 
 }

@@ -28,6 +28,22 @@
                     </div>
                   </div>
 
+                  <div class="mb-3">
+                    <label for="notaDinas"><b>Nota Dinas</b></label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="notaDinas"
+                      name="NOTA_DINAS"
+                      placeholder=""
+                      value="<?php echo $NOTA_DINAS; ?>"
+                      required
+                    />
+                    <div class="invalid-feedback">
+                      Tolong masukkan nota dinas yang valid
+                    </div>
+                  </div>
+
                   <div class="d-block my-3">
                     <h6 class="mb-3"><b>Tipe Rapat</b></h6>
                     <div class="custom-control custom-radio">
@@ -218,6 +234,11 @@
                     </div>
                   </div>
                 </div>
+              </div>
+
+              <div class="form-group">
+                <label for="notulensi">Notulensi</label>
+                <textarea class="form-control" rows="3" name="NOTULENSI" id="notulensi" placeholder="bisa diisi nanti"><?php echo $NOTULENSI; ?></textarea>
               </div>
 
               <hr class="mb-4" />

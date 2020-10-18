@@ -36,6 +36,7 @@ class meetpic extends CI_Controller {
         $data = array(
             'button' => 'Tambah Rapat',
             'action' => site_url('meetpic/add_meet_action'),
+            'form' => 'hidden',
             'ID_RAPAT' => set_value('ID_RAPAT'),
             'NIK_PIC' => set_value('NIK_PIC'),
     	    'KODE_RAPAT' => set_value('KODE_RAPAT'),
@@ -99,6 +100,7 @@ class meetpic extends CI_Controller {
             $data = array(
                 'button' => 'Edit Rapat',
                 'action' => site_url('meetpic/update_action'),
+                'form' => 'text',
         		'ID_RAPAT' => $row->ID_RAPAT,
         		'NIK_PIC' => $row->NIK_PIC,
                 'KODE_RAPAT' => $row->KODE_RAPAT,

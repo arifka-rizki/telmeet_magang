@@ -18,7 +18,7 @@ class meetinv extends CI_Controller {
     }
 
     public function index(){
-        $data['data']=$this->m_rapat->get_all();
+        $data['data']=$this->m_rapat->get_by_inv($this->session->userdata("nik"));
         $this->load->view('templates/header');
         $this->load->view('templates/navbar');
         $this->load->view('v_dashboardundangan',$data);
@@ -42,7 +42,7 @@ class meetinv extends CI_Controller {
                 'ID_RAPAT' => $row->ID_RAPAT,
                 'KODE_RAPAT' => $row->KODE_RAPAT,
         		'NAMA_RAPAT' => $row->NAMA_RAPAT,
-        		'ID_PIC' => $row->ID_PIC,
+        		'NIK_PIC' => $row->NIK_PIC,
         		'TANGGAL' => $row->TANGGAL,
         		'WAKTU_MULAI' => $row->WAKTU_MULAI,
         		'WAKTU_SELESAI' => $row->WAKTU_SELESAI,
@@ -51,7 +51,7 @@ class meetinv extends CI_Controller {
         		'PENGUNDANG' => $row->PENGUNDANG,
         		'NOTA_DINAS' => $row->NOTA_DINAS,
         		'STATUS' => $row->STATUS,
-        		'PESERTA' => $row->PESERTA,
+        		'NOTULENSI' => $row->NOTULENSI,
                 'NOTULEN' => $row->NOTULEN,
                 'PENANDATANGAN' => $row->PENANDATANGAN,
 	        );
