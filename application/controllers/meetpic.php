@@ -71,7 +71,7 @@ class meetpic extends CI_Controller {
 
             $data["data"] = array(
                 'NIK_PIC' => $this->session->userdata("nik"),
-        		'KODE_RAPAT' => $this->input->post('KODE_RAPAT',TRUE),
+        		'KODE_RAPAT' => $this->m_rapat->generate_code(),
         		'NAMA_RAPAT' => $this->input->post('NAMA_RAPAT',TRUE),
         		'TANGGAL' => $this->input->post('TANGGAL',TRUE),
         		'WAKTU_MULAI' => $this->input->post('WAKTU_MULAI',TRUE),
@@ -228,5 +228,17 @@ class meetpic extends CI_Controller {
             redirect(site_url('meetpic'));
         }
         
+    }
+
+    public function search_keyword()
+    {
+        $keyword = $this->input->post('keyword',TRUE);
+        $data['data']    =   $this->m_rapat->search($keyword,$this->session->userdata("nik"));
+
+        $this->load->view('templates/header');
+        $this->load->view('templates/navbar');
+        $this->load->view('v_dashboardpic',$data);
+        $this->load->view('templates/copyright');
+        $this->load->view('templates/footer');
     }
 }

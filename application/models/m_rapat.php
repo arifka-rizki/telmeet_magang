@@ -20,7 +20,7 @@ class m_rapat extends CI_Model
 
     // datatables
     function json() {
-        $this->datatables->select('ID_rapat,KODE_RAPAT,NAMA_RAPAT,ID_PIC,TANGGAL,WAKTU_MULAI,WAKTU_SELESAI,TEMPAT,TIPE_RAPAT,PENGUNDANG,NOTA_DINAS,STATUS,PESERTA,NOTULEN,PENANDATANGAN');
+        $this->datatables->select('ID_rapat,KODE_RAPAT,NAMA_RAPAT,NIK_PIC,TANGGAL,WAKTU_MULAI,WAKTU_SELESAI,TEMPAT,TIPE_RAPAT,PENGUNDANG,NOTA_DINAS,STATUS,PESERTA,NOTULEN,PENANDATANGAN');
         $this->datatables->from('tb_rapat');
         //add this line for join
         //$this->datatables->join('table2', 'tb_mobil.field = table2.field');
@@ -54,6 +54,25 @@ class m_rapat extends CI_Model
         return $this->db->get()->result();
     }
 
+    function search($keyword,$pic) 
+    {
+        $this->db->like('KODE_RAPAT', $keyword);
+        $this->db->or_like('NAMA_RAPAT', $keyword);
+	    //$this->db->or_like('TANGGAL', $keyword);
+        //$this->db->or_like('WAKTU_MULAI', $keyword);
+        //$this->db->or_like('WAKTU_SELESAI',$keyword);
+	    $this->db->or_like('TEMPAT', $keyword);
+        $this->db->or_like('TIPE_RAPAT', $keyword);
+        $this->db->or_like('PENGUNDANG', $keyword);
+        $this->db->or_like('NOTA_DINAS', $keyword);
+	    //$this->db->or_like('STATUS', $keyword);
+        $this->db->or_like('NOTULEN', $keyword);
+        $this->db->or_like('PENANDATANGAN', $keyword);
+        $this->db->where($this->pic,$pic);
+	    $this->db->from($this->table);
+        return $this->db->get()->result();
+    }
+
     /* get data avalilable car
     function get_available()
     {
@@ -74,7 +93,7 @@ class m_rapat extends CI_Model
         $this->db->like('ID_RAPAT', $q);
         $this->db->or_like('KODE_RAPAT', $q);
         $this->db->or_like('NAMA_RAPAT', $q);
-	    $this->db->or_like('ID_PIC', $q);
+	    $this->db->or_like('NIK_PIC', $q);
 	    $this->db->or_like('TANGGAL', $q);
         $this->db->or_like('WAKTU_MULAI', $q);
         $this->db->or_like('WAKTU_SELESAI',$q);
@@ -83,7 +102,6 @@ class m_rapat extends CI_Model
         $this->db->or_like('PENGUNDANG', $q);
         $this->db->or_like('NOTA_DINAS', $q);
 	    $this->db->or_like('STATUS', $q);
-        $this->db->or_like('PESERTA', $q);
         $this->db->or_like('NOTULEN', $q);
         $this->db->or_like('PENANDATANGAN', $q);
 	    $this->db->from($this->table);
@@ -96,7 +114,7 @@ class m_rapat extends CI_Model
         $this->db->like('ID_RAPAT', $q);
         $this->db->or_like('KODE_RAPAT', $q);
 	    $this->db->or_like('NAMA_RAPAT', $q);
-	    $this->db->or_like('ID_PIC', $q);
+	    $this->db->or_like('NIK_PIC', $q);
 	    $this->db->or_like('TANGGAL', $q);
         $this->db->or_like('WAKTU_MULAI', $q);
         $this->db->or_like('WAKTU_SELESAI',$q);
@@ -105,7 +123,6 @@ class m_rapat extends CI_Model
         $this->db->or_like('PENGUNDANG', $q);
         $this->db->or_like('NOTA_DINAS', $q);
 	    $this->db->or_like('STATUS', $q);
-        $this->db->or_like('PESERTA', $q);
         $this->db->or_like('NOTULEN', $q);
         $this->db->or_like('PENANDATANGAN', $q);
 	    $this->db->from($this->table);
@@ -119,6 +136,27 @@ class m_rapat extends CI_Model
         $this->db->insert($this->table, $data['data']);
         $this->db->insert_id();
     }
+
+    function generate_code() { 
+
+        $chars = "abcdefghijkmnopqrstuvwxyz023456789"; 
+        srand((double)microtime()*1000000); 
+        $i = 0; 
+        $pass = '' ; 
+    
+        while ($i <= 7) { 
+            $num = rand() % 33; 
+            $tmp = substr($chars, $num, 1); 
+            $pass = $pass . $tmp; 
+            $i++; 
+        } 
+    
+        if($this->db->where('EMAIL',$pass) ){
+            return $pass;
+        }
+        else $this->generate_code();
+    
+    } 
 
     // update data
     function update($id, $data)

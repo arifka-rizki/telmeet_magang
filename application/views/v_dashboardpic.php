@@ -16,10 +16,11 @@
           <div class="col">
             <div class="row py-2">
               <div class="col-md-6 col-sm-12">
-                <form class="form-inline mt-2">
+                <form class="form-inline mt-2" action="<?php echo site_url('meetpic/search_keyword')?>" method="post">
                   <input
                     class="form-control col-sm-8"
                     type="search"
+                    name="keyword"
                     placeholder="Search"
                     aria-label="Search"
                   />
