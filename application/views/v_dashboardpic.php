@@ -7,7 +7,7 @@
         </div>
         <div class="row p-3 shadow-sm rounded bg-white my-3">
           <a href="#" class="btn btn-danger">Penanggung Jawab</a>
-          <a href="berandaundangan.html" class="btn btn-outline-danger"
+          <a href="<?php echo base_url('meetinv'); ?>" class="btn btn-outline-danger"
             >Undangan</a
           >
         </div>
@@ -16,10 +16,11 @@
           <div class="col">
             <div class="row py-2">
               <div class="col-md-6 col-sm-12">
-                <form class="form-inline mt-2">
+                <form class="form-inline mt-2" action="<?php echo site_url('meetpic/search_keyword')?>" method="post">
                   <input
                     class="form-control col-sm-8"
                     type="search"
+                    name="keyword"
                     placeholder="Search"
                     aria-label="Search"
                   />
@@ -63,14 +64,17 @@
                   </thead>
                   <tbody>
                     <tr class="border">
-                      <td>1</td>
-                      <td>Perencanaan kadal</td>
-                      <td>12/02/30</td>
-                      <td>01.01 AM</td>
-                      <td>Pengambilan Keputusan</td>
-                      <td>https://meet.google.com/nus-gzpt-gjw</td>
+                    <!-- <?php var_dump($data) ?> -->
+                      <?php foreach ($data as $key => $val): ?>
+                        <tr>
+                          <td><?php echo $key+1 ?></td>
+                          <td><?php echo $val->NAMA_RAPAT; ?></td>
+                          <td><?php echo $val->TANGGAL ?></td>
+                          <td><?php echo $val->WAKTU_MULAI ?></td>
+                          <td><?php echo $val->TIPE_RAPAT ?></td>
+                          <td><?php echo $val->TEMPAT ?></td>             
                       <td>
-                        <a href="<?php echo base_url('meetpic/detail'); ?>">
+                        <a href="<?php echo base_url('meetpic/detail').'/'.$val->ID_RAPAT ?>">
                           <button class="btn btn-outline-danger px-3 py-1">
                             Detail
                           </button>
@@ -84,7 +88,7 @@
                         </a>
                       </td>
                       <td>
-                        <a href="ubah.html">
+                        <a href="<?php echo base_url('meetpic/update').'/'.$val->ID_RAPAT ?>">
                           <button class="btn btn-outline-danger px-2 py-1">
                             <i class="fas fa-wrench"></i>
                           </button>
@@ -101,6 +105,7 @@
                         </button>
                       </td>
                     </tr>
+                    <?php endforeach ?>
                   </tbody>
                 </table>
               </div>
