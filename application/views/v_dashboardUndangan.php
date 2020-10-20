@@ -16,12 +16,13 @@
           <div class="col">
             <div class="row py-2">
               <div class="col-md-6 col-sm-12">
-                <form class="form-inline mt-2">
+                <form class="form-inline mt-2" action="<?php echo site_url('meetinv/search_keyword')?>" method="post">
                   <input
                     class="form-control col-sm-8"
                     type="search"
                     placeholder="Search"
                     aria-label="Search"
+                    name="keyword"
                   />
                   <button
                     class="btn btn-danger my-2 col-md-2 col-sm-12"
@@ -65,12 +66,13 @@
                       </button>
                     </div>
                     <div class="modal-body">
-                      <form class="needs-validation" novalidate>
+                      <form class="needs-validation" novalidate action="<?php echo site_url('meetinv/preview_rapat');?>" method="post">
                         <div class="mb-4">
                           <label for="kodeRapat"><b>Kode Rapat</b></label>
                           <input
                             type="text"
                             class="form-control"
+                            name="kodeRapat"
                             id="kodeRapat"
                             placeholder=""
                             value=""
@@ -78,14 +80,14 @@
                           />
                         </div>
 
-                        <a href="detailrapatundangan.html">
+                        <!--<a href="detailrapatundangan.html">-->
                           <button
-                            type="button"
+                            type="submit"
                             class="btn btn-danger float-right ml-1"
                           >
                             Konfirmasi
                           </button>
-                        </a>
+                        <!--</a>-->
                         <!--<button
                           type="button"
                           class="btn btn-secondary float-right"

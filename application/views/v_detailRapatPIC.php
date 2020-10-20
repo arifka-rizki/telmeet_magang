@@ -22,9 +22,13 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
+                  <tr>
                       <th>Judul Rapat</th>
                       <td><?php echo $NAMA_RAPAT;?></td>
+                    </tr>
+                    <tr>
+                      <th>Nota Dinas</th>
+                      <td><?php echo $NOTA_DINAS;?></td>
                     </tr>
                     <tr>
                       <th>Tipe Rapat</th>
@@ -43,6 +47,10 @@
                       <td><?php echo $WAKTU_MULAI;?></td>
                     </tr>
                     <tr>
+                      <th>Lokasi Rapat</th>
+                      <td><?php echo $TEMPAT;?></td>
+                    </tr>
+                    <tr>
                       <th>Notulen</th>
                       <td><?php echo $NOTULEN;?></td>
                     </tr>
@@ -51,16 +59,8 @@
                       <td><?php echo $PENANDATANGAN;?></td>
                     </tr>
                     <tr>
-                      <th>Lokasi Rapat</th>
-                      <td><?php echo $TEMPAT;?></td>
-                    </tr>
-                    <tr>
-                      <th>Nota Dinas</th>
-                      <td><?php echo $NOTA_DINAS;?></td>
-                    </tr>
-                    <tr>
-                      <th>Lokasi Rapat</th>
-                      <td><?php echo $TEMPAT;?></td>
+                      <th>Kode Rapat</th>
+                      <td><?php echo $KODE_RAPAT;?></td>
                     </tr>
                   </tbody>
                 </table>
@@ -87,7 +87,7 @@
                     Peserta
                   </button>
                 </a>
-                <a href="">
+                <a href="<?php echo base_url('meetpic/delete').'/'.$ID_RAPAT ?>">
                   <button
                     type="button"
                     class="btn btn-outline-danger float-right ml-1"
@@ -98,7 +98,7 @@
                     Batalkan
                   </button>
                 </a>
-                <a href="">
+                <a href="<?php echo base_url('meetpic/update').'/'.$ID_RAPAT ?>">
                   <button
                     type="button"
                     class="btn btn-outline-danger float-right ml-1"

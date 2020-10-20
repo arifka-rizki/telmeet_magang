@@ -3,7 +3,7 @@
     <div class="shadow-sm p-0">
       <nav class="navbar navbar-expand-lg navbar-light bg-white">
         <div class="container">
-          <a class="navbar-brand" href="<?php echo base_url('meet'); ?>"><b>Telmeet</b></a>
+          <a class="navbar-brand" href="<?php echo base_url('meetpic'); ?>"><b>Telmeet</b></a>
           <button
             class="navbar-toggler"
             type="button"
