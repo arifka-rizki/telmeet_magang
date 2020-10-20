@@ -14,8 +14,9 @@
                 placeholder=""
                 required
                 name="nik"
+                value="<?php echo set_value('nik');?>"
               />
-              <div class="invalid-feedback">Tolong masukkan NIK.</div>
+              <?php echo form_error('nik', '<p class = "alert alert-danger" role="alert">', '</p>'); ?>
             </div>
 
             <div class="mb-3">
@@ -29,6 +30,7 @@
                 required
                 name="password"
               />
+              <?= form_error('password', '<p class = "alert alert-danger" role="alert">', '</p>'); ?>
             </div>
 
             <hr class="mb-4" />
@@ -40,7 +42,7 @@
             <p class="text-center my-4">Atau</p>
 
             <a
-              href="<?php echo base_url('auth/external'); ?>"
+              href="<?php echo base_url('external'); ?>"
               class="btn btn-outline-danger btn-lg btn-block"
               >Peserta Eksternal</a
             >
