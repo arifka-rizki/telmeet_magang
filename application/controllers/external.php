@@ -74,7 +74,8 @@ class external extends CI_Controller {
                 'JENIS_KELAMIN' => $jenisKelamin,
                 'INSTANSI' => $instansi,
                 'JABATAN' => $jabatan,
-                'NO_TELEPON' => $telefon
+                'NO_TELEPON' => $telefon,
+                'ROLE' => 1
             );
 
             $meet = $this->m_external->check_meet($kodeRapat);

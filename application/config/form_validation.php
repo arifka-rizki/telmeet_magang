@@ -4,7 +4,7 @@ $config = array(
         array(
             'field' => 'nama',
             'label' => 'Nama',
-            'rules' => 'required|alpha',
+            'rules' => 'required|alpha_numeric_spaces',
             'errors' => array(
                 'required' => 'Masukkan Nama Anda',
                 'alpha' => 'Nama Hanya Mengandung Alphabet'
