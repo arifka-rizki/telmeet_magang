@@ -50,7 +50,6 @@ class meetpic extends CI_Controller {
             'PENANDATANGAN' => set_value('PENANDATANGAN'),
     	    'PENGUNDANG' => set_value('PENGUNDANG'),
 	        'NOTA_DINAS' => set_value('NOTA_DINAS'),
-            'NOTULENSI' => set_value('NOTULENSI'),
         );
         
         $this->load->view('templates/header');
@@ -82,7 +81,6 @@ class meetpic extends CI_Controller {
                 'PENANDATANGAN' => $this->input->post('PENANDATANGAN',TRUE),
         		'PENGUNDANG' => $this->input->post('PENGUNDANG',TRUE),
         		'NOTA_DINAS' => $this->input->post('NOTA_DINAS',TRUE),
-                'NOTULENSI' => $this->input->post('NOTULENSI',TRUE),               
     	    );
             
             $this->m_rapat->insert($data);
@@ -101,7 +99,6 @@ class meetpic extends CI_Controller {
                 'action' => site_url('meetpic/update_action'),
         		'ID_RAPAT' => $row->ID_RAPAT,
         		'NIK_PIC' => $row->NIK_PIC,
-                'KODE_RAPAT' => $row->KODE_RAPAT,
                 'NAMA_RAPAT' => $row->NAMA_RAPAT,
                 'TANGGAL' => $row->TANGGAL,
                 'WAKTU_MULAI' => $row->WAKTU_MULAI,
@@ -113,7 +110,6 @@ class meetpic extends CI_Controller {
                 'PENANDATANGAN' => $row->PENANDATANGAN,
                 'PENGUNDANG' => $row->PENGUNDANG,
                 'NOTA_DINAS' => $row->NOTA_DINAS,
-                'NOTULENSI' => $row->NOTULENSI,
             );
             
             $this->load->view('templates/header');
@@ -138,7 +134,6 @@ class meetpic extends CI_Controller {
         //} else {
             $data['update'] = array(
         		'NIK_PIC' => $this->session->userdata("nik"),
-        		'KODE_RAPAT' => $this->input->post('KODE_RAPAT',TRUE),
         		'NAMA_RAPAT' => $this->input->post('NAMA_RAPAT',TRUE),
         		'TANGGAL' => $this->input->post('TANGGAL',TRUE),
         		'WAKTU_MULAI' => $this->input->post('WAKTU_MULAI',TRUE),
@@ -150,7 +145,6 @@ class meetpic extends CI_Controller {
                 'PENANDATANGAN' => $this->input->post('PENANDATANGAN',TRUE),
         		'PENGUNDANG' => $this->input->post('PENGUNDANG',TRUE),
         		'NOTA_DINAS' => $this->input->post('NOTA_DINAS',TRUE),
-                'NOTULENSI' => $this->input->post('NOTULENSI',TRUE),
             );
 
             $this->m_rapat->update($this->input->post('ID_RAPAT', TRUE), $data);
@@ -214,7 +208,6 @@ class meetpic extends CI_Controller {
                 'PENANDATANGAN' => set_value('PENANDATANGAN', $row->PENANDATANGAN),
                 'PENGUNDANG' => set_value('PENGUNDANG', $row->PENGUNDANG),
                 'NOTA_DINAS' => set_value('NOTA_DINAS', $row->NOTA_DINAS),
-                'NOTULENSI' => set_value('NOTULENSI', $row->NOTULENSI),
 	        );
             $this->load->view('templates/header');
             $this->load->view('templates/navbar');
@@ -231,12 +224,39 @@ class meetpic extends CI_Controller {
     public function search_keyword()
     {
         $keyword = $this->input->post('keyword',TRUE);
-        $data['data']    =   $this->m_rapat->search_pic($keyword,$this->session->userdata("nik"));
+        $data['data'] = $this->m_rapat->search_pic($keyword,$this->session->userdata("nik"));
 
         $this->load->view('templates/header');
         $this->load->view('templates/navbar');
         $this->load->view('v_dashboardpic',$data);
         $this->load->view('templates/copyright');
         $this->load->view('templates/footer');
+    }
+
+    public function daftar_peserta($id)
+    {
+        $row = $this->m_rapat->get_by_id($id);
+        $peserta = $this->m_rapat->get_peserta_rapat($id);
+        
+        if ($row) {
+            $data = array(                                    
+                'NAMA_RAPAT'=> $row->NAMA_RAPAT,
+                'TANGGAL' => $row->TANGGAL,
+                'WAKTU_MULAI' => $row->WAKTU_MULAI,
+            );
+            $data['data'] = $peserta;            
+            /*$data['data'] = array(
+                'NAMA' => set_value('NAMA', $peserta->NAMA),
+        		'WAKTU_PRESENSI' => set_value('WAKTU_PRESENSI', $peserta->WAKTU_PRESENSI),
+                'BUKTI_KEHADIRAN' => set_value('BUKTI_KEHADIRAN', $peserta->KODE_RAPAT),
+            );*/
+
+            $this->load->view('templates/header');
+            $this->load->view('templates/navbar');
+            $this->load->view('v_daftarPeserta', $data);
+            $this->load->view('templates/copyright');
+            $this->load->view('templates/footer');
+        }
+        else redirect('meetpic');
     }
 }

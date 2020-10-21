@@ -21,7 +21,7 @@
                     class="form-control col-sm-8"
                     type="search"
                     name="keyword"
-                    placeholder="Search"
+                    placeholder="Cari Agenda Rapat"
                     aria-label="Search"
                   />
                   <button
@@ -81,7 +81,7 @@
                         </a>
                       </td>
                       <td>
-                        <a href="daftarpeserta.html">
+                        <a href="<?php echo base_url('meetpic/daftar_peserta').'/'.$val->ID_RAPAT?>">
                           <button class="btn btn-outline-danger px-2 py-1">
                             <i class="fas fa-user-alt"></i>
                           </button>

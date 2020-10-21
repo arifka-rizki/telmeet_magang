@@ -236,11 +236,6 @@
                 </div>
               </div>
 
-              <div class="form-group">
-                <label for="notulensi">Notulensi</label>
-                <textarea class="form-control" rows="3" name="NOTULENSI" id="notulensi" placeholder="bisa diisi nanti"><?php echo $NOTULENSI; ?></textarea>
-              </div>
-
               <hr class="mb-4" />
 
               <input type="hidden" name="ID_RAPAT" value="<?php echo $ID_RAPAT; ?>" /> 

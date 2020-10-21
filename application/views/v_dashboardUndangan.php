@@ -20,7 +20,7 @@
                   <input
                     class="form-control col-sm-8"
                     type="search"
-                    placeholder="Search"
+                    placeholder="Cari Agenda Rapat"
                     aria-label="Search"
                     name="keyword"
                   />

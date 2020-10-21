@@ -10,7 +10,7 @@ class m_rapat extends CI_Model
     public $id = 'ID_RAPAT';
     public $order = 'DESC';
     public $pic = 'NIK_PIC';
-    public $inv = 'ID_USER';
+    public $inv = 'NIK';
     public $tb_peserta = 'tb_peserta_rapat';
 
     function __construct()
@@ -54,25 +54,27 @@ class m_rapat extends CI_Model
         return $this->db->get()->result();
     }
 
-    function search_pic($keyword,$pic) 
+    function search_pic($keyword,$nik) 
     {
-        $this->db->like('KODE_RAPAT', $keyword);
-        $this->db->or_like('NAMA_RAPAT', $keyword);
+        $this->db->where('NIK_PIC',$nik);
+        $this->db->where('STATUS', '0');
+        $this->db->order_by('TANGGAL', 'ASC');
+
+        //$this->db->like('KODE_RAPAT', $keyword);
+        $this->db->like('NAMA_RAPAT', $keyword);
 	    //$this->db->or_like('TANGGAL', $keyword);
         //$this->db->or_like('WAKTU_MULAI', $keyword);
         //$this->db->or_like('WAKTU_SELESAI',$keyword);
-	    $this->db->or_like('TEMPAT', $keyword);
+	    /*$this->db->or_like('TEMPAT', $keyword);
         $this->db->or_like('TIPE_RAPAT', $keyword);
         $this->db->or_like('PENGUNDANG', $keyword);
         $this->db->or_like('NOTA_DINAS', $keyword);
 	    //$this->db->or_like('STATUS', $keyword);
         $this->db->or_like('NOTULEN', $keyword);
-        $this->db->or_like('PENANDATANGAN', $keyword);
-        $this->db->where($this->pic,$pic);
-        $this->db->where('STATUS', '0');
-        $this->db->order_by('TANGGAL', 'ASC');
-	    $this->db->from($this->table);
-        return $this->db->get()->result();
+        $this->db->or_like('PENANDATANGAN', $keyword);*/
+        
+	    //$this->db->from();
+        return $this->db->get($this->table)->result();
     }
 
     function search_inv($keyword,$inv) 
@@ -84,19 +86,19 @@ class m_rapat extends CI_Model
         $this->db->join('tb_peserta_rapat', 'tb_peserta_rapat.ID_RAPAT=tb_rapat.ID_RAPAT','inner');
         $this->db->order_by('TANGGAL', 'ASC');
 
-        $this->db->like('KODE_RAPAT', $keyword);
-        $this->db->or_like('NAMA_RAPAT', $keyword);
+        //$this->db->like('KODE_RAPAT', $keyword);
+        $this->db->like('NAMA_RAPAT', $keyword);
 	    //$this->db->or_like('TANGGAL', $keyword);
         //$this->db->or_like('WAKTU_MULAI', $keyword);
         //$this->db->or_like('WAKTU_SELESAI',$keyword);
-	    $this->db->or_like('TEMPAT', $keyword);
+	    /*$this->db->or_like('TEMPAT', $keyword);
         $this->db->or_like('TIPE_RAPAT', $keyword);
         $this->db->or_like('PENGUNDANG', $keyword);
         $this->db->or_like('NOTA_DINAS', $keyword);
 	    //$this->db->or_like('STATUS', $keyword);
         $this->db->or_like('NOTULEN', $keyword);
         $this->db->or_like('PENANDATANGAN', $keyword);
-	    //$this->db->from($this->table);
+	    //$this->db->from($this->table);*/
         return $this->db->get()->result();
     }
 
@@ -107,26 +109,36 @@ class m_rapat extends CI_Model
         return $this->db->get($this->table)->row();
     }
 
-    function join_rapat($kode_rapat,$inv)
+    function join_rapat($id,$inv)
     {
-        $this->db->where('KODE_RAPAT',$kode_rapat);
-        $this->db->from($this->table);
-        $rapat=$this->db->select($this->id);
-
         $data['data']=array(
-            'ID_RAPAT' => $rapat,
-            'ID_USER' => $inv
+            'ID_RAPAT' => $id,
+            'NIK' => $inv,
+            'WAKTU_PRESENSI' => date("Y-m-d H:i:s")
         );
 
         $this->db->insert('tb_peserta_rapat', $data['data']);
     }
 
-    /* get data avalilable car
-    function get_available()
+    function get_data_peserta_rapat($nik,$rapat)
     {
-        $this->db->where("STATUS_SEWA", 0);
-        return $this->db->get($this->table)->result();
-    }*/
+        $this->db->where($this->inv, $nik);
+        $this->db->where('tb_rapat.ID_RAPAT',$rapat);
+        $this->db->where('STATUS', '0');
+        $this->db->select('*');
+        $this->db->from('tb_peserta_rapat');
+        $this->db->join('tb_rapat', 'tb_peserta_rapat.ID_RAPAT=tb_rapat.ID_RAPAT','inner');
+        return $this->db->get()->row();
+    }
+
+    function get_peserta_rapat($rapat)
+    {
+        $this->db->where('tb_peserta_rapat.ID_RAPAT',$rapat);
+        $this->db->select('tb_users.NAMA, tb_peserta_rapat.WAKTU_PRESENSI, tb_peserta_rapat.BUKTI_KEHADIRAN');
+        $this->db->from('tb_users');
+        $this->db->join('tb_peserta_rapat', 'tb_peserta_rapat.NIK=tb_users.NIK','inner');
+        return $this->db->get()->result();
+    }
 
      // get data by id
     function get_by_id($id)

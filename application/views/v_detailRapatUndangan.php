@@ -33,6 +33,14 @@
                       <td><?php echo $NOTA_DINAS;?></td>
                     </tr>
                     <tr>
+                      <th>Kode Rapat</th>
+                      <td><?php echo $KODE_RAPAT;?></td>
+                    </tr>
+                    <tr>
+                      <th>Nama PIC</th>
+                      <td><?php echo $NAMA_PIC;?></td>
+                    </tr>
+                    <tr>
                       <th>Tipe Rapat</th>
                       <td><?php echo $TIPE_RAPAT;?></td>
                     </tr>
@@ -59,11 +67,7 @@
                     <tr>
                       <th>Penandatangan Rapat</th>
                       <td><?php echo $PENANDATANGAN;?></td>
-                    </tr>
-                    <tr>
-                      <th>Kode Rapat</th>
-                      <td><?php echo $KODE_RAPAT;?></td>
-                    </tr>
+                    </tr>                    
                   </tbody>
                 </table>
               </div>
@@ -78,10 +82,11 @@
                   <span class="p-2"><i class="fas fa-download"></i></span>
                   Download
                 </button>
-                <a href="berandaundangan.html">
+                <?php if ($show_button) { ?>
+                <a href="<?php echo base_url('meetinv/presensi_rapat').'/'.$ID_RAPAT?>">
                   <button
                     type="button"
-                    class="btn btn-outline-danger float-right"
+                    class="btn btn-outline-danger float-right"                    
                   >
                     <span class="p-2">
                       <i class="fas fa-calendar-check"></i>
@@ -89,6 +94,7 @@
                     Presensi
                   </button>
                 </a>
+                <?php } ?>
               </div>
             </div>
           </div>
