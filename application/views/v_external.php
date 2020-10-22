@@ -60,6 +60,14 @@
                       Konfirmasi
                     </button>
                   </form>
+                  <div class="float-left">
+                    <button
+                        type="submit"
+                        class="btn btn-danger float-right ml-1 mb-3"
+                      > <span class="m-1"><i class="fas fa-arrow-left"></i></span>
+                        Kembali
+                      </button>
+                  </div>
                 </div>
               </div>
 
@@ -82,13 +90,11 @@
                         <li class="list-group-item">Tanggal: <?php echo $meet->TANGGAL?></li>
                         <li class="list-group-item">Waktu: <?php echo $meet->WAKTU_MULAI?></li>
                         <li class="list-group-item">Tempat: <?php echo $meet->TEMPAT?></li>
-                        <li class="list-group-item">Status: <?php echo $meet->STATUS?></li>
                         <?php } else{?>
                         <li class="list-group-item">Nama: </li>
                         <li class="list-group-item">Tanggal: </li>
                         <li class="list-group-item">Waktu: </li>
                         <li class="list-group-item">Tempat: </li>
-                        <li class="list-group-item">Status: </li>
                         <?php }?>
                       </ul>
                     </div>
