@@ -35,6 +35,7 @@ class m_rapat extends CI_Model
         return $this->db->get($this->table)->result();
     }
 
+    //get rapat yg di pic in
     function get_by_pic($pic)
     {
         $this->db->where($this->pic, $pic);
@@ -43,6 +44,7 @@ class m_rapat extends CI_Model
         return $this->db->get($this->table)->result();
     }
 
+    //get rapat undangan
     function get_by_inv($inv)
     {
         $this->db->where($this->inv, $inv);
@@ -54,29 +56,18 @@ class m_rapat extends CI_Model
         return $this->db->get()->result();
     }
 
+    //cari agenda rapat pic
     function search_pic($keyword,$nik) 
     {
         $this->db->where('NIK_PIC',$nik);
         $this->db->where('STATUS', '0');
         $this->db->order_by('TANGGAL', 'ASC');
-
-        //$this->db->like('KODE_RAPAT', $keyword);
         $this->db->like('NAMA_RAPAT', $keyword);
-	    //$this->db->or_like('TANGGAL', $keyword);
-        //$this->db->or_like('WAKTU_MULAI', $keyword);
-        //$this->db->or_like('WAKTU_SELESAI',$keyword);
-	    /*$this->db->or_like('TEMPAT', $keyword);
-        $this->db->or_like('TIPE_RAPAT', $keyword);
-        $this->db->or_like('PENGUNDANG', $keyword);
-        $this->db->or_like('NOTA_DINAS', $keyword);
-	    //$this->db->or_like('STATUS', $keyword);
-        $this->db->or_like('NOTULEN', $keyword);
-        $this->db->or_like('PENANDATANGAN', $keyword);*/
-        
-	    //$this->db->from();
+	    
         return $this->db->get($this->table)->result();
     }
 
+    //cari agenda rapat undangan 
     function search_inv($keyword,$inv) 
     {
         $this->db->where($this->inv, $inv);
@@ -86,22 +77,12 @@ class m_rapat extends CI_Model
         $this->db->join('tb_peserta_rapat', 'tb_peserta_rapat.ID_RAPAT=tb_rapat.ID_RAPAT','inner');
         $this->db->order_by('TANGGAL', 'ASC');
 
-        //$this->db->like('KODE_RAPAT', $keyword);
         $this->db->like('NAMA_RAPAT', $keyword);
-	    //$this->db->or_like('TANGGAL', $keyword);
-        //$this->db->or_like('WAKTU_MULAI', $keyword);
-        //$this->db->or_like('WAKTU_SELESAI',$keyword);
-	    /*$this->db->or_like('TEMPAT', $keyword);
-        $this->db->or_like('TIPE_RAPAT', $keyword);
-        $this->db->or_like('PENGUNDANG', $keyword);
-        $this->db->or_like('NOTA_DINAS', $keyword);
-	    //$this->db->or_like('STATUS', $keyword);
-        $this->db->or_like('NOTULEN', $keyword);
-        $this->db->or_like('PENANDATANGAN', $keyword);
-	    //$this->db->from($this->table);*/
+
         return $this->db->get()->result();
     }
 
+    //get rapat dari kode
     function get_by_kode($kode)
     {
         $this->db->where('KODE_RAPAT',$kode);
@@ -109,17 +90,20 @@ class m_rapat extends CI_Model
         return $this->db->get($this->table)->row();
     }
 
-    function join_rapat($id,$inv)
+    //presensi rapat
+    function join_rapat($id,$inv,$bukti)
     {
         $data['data']=array(
             'ID_RAPAT' => $id,
             'NIK' => $inv,
-            'WAKTU_PRESENSI' => date("Y-m-d H:i:s")
+            'WAKTU_PRESENSI' => date("Y-m-d H:i:s"),
+            'BUKTI_KEHADIRAN' => $bukti,
         );
 
         $this->db->insert('tb_peserta_rapat', $data['data']);
     }
 
+    //get data rapat dan peserta rapat dari nik dan id rapat
     function get_data_peserta_rapat($nik,$rapat)
     {
         $this->db->where($this->inv, $nik);
@@ -131,6 +115,7 @@ class m_rapat extends CI_Model
         return $this->db->get()->row();
     }
 
+    //get data user peserta rapat
     function get_peserta_rapat($rapat)
     {
         $this->db->where('tb_peserta_rapat.ID_RAPAT',$rapat);
@@ -146,6 +131,49 @@ class m_rapat extends CI_Model
         $this->db->where($this->id, $id);
         $data=$this->db->get($this->table);
         return $data->row();
+    }
+
+    // insert data rapat
+    function insert($data)
+    {
+        $this->db->insert($this->table, $data['data']);
+        $this->db->insert_id();
+    }
+
+    //generate kode rapat
+    function generate_code() { 
+
+        $chars = "abcdefghijkmnopqrstuvwxyz023456789"; 
+        srand((double)microtime()*1000000); 
+        $i = 0; 
+        $pass = '' ; 
+    
+        while ($i <= 7) { 
+            $num = rand() % 33; 
+            $tmp = substr($chars, $num, 1); 
+            $pass = $pass . $tmp; 
+            $i++; 
+        } 
+    
+        if($this->db->where('EMAIL',$pass) ){
+            return $pass;
+        }
+        else $this->generate_code();
+    
+    } 
+
+    // update data
+    function update($id, $data)
+    {
+        $this->db->where($this->id, $id)->update($this->table, $data['update']);           
+    }
+
+    // delete rapat (cuma ganti status)
+    function delete($id)
+    {
+        $this->db->where($this->id, $id);
+        $this->db->set('STATUS','1');
+        $this->db->update($this->table);
     }
     
     // get total rows
@@ -188,48 +216,6 @@ class m_rapat extends CI_Model
 	    $this->db->from($this->table);
     	$this->db->limit($limit, $start);
         return $this->db->get($this->table)->result();
-    }
-
-    // insert data
-    function insert($data)
-    {
-        $this->db->insert($this->table, $data['data']);
-        $this->db->insert_id();
-    }
-
-    function generate_code() { 
-
-        $chars = "abcdefghijkmnopqrstuvwxyz023456789"; 
-        srand((double)microtime()*1000000); 
-        $i = 0; 
-        $pass = '' ; 
-    
-        while ($i <= 7) { 
-            $num = rand() % 33; 
-            $tmp = substr($chars, $num, 1); 
-            $pass = $pass . $tmp; 
-            $i++; 
-        } 
-    
-        if($this->db->where('EMAIL',$pass) ){
-            return $pass;
-        }
-        else $this->generate_code();
-    
-    } 
-
-    // update data
-    function update($id, $data)
-    {
-        $this->db->where($this->id, $id)->update($this->table, $data['update']);           
-    }
-
-    // delete data
-    function delete($id)
-    {
-        $this->db->where($this->id, $id);
-        $this->db->set('STATUS','1');
-        $this->db->update($this->table);
     }
 
 }

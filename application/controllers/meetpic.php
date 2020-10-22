@@ -12,7 +12,7 @@ class meetpic extends CI_Controller {
         }
 
         $this->load->model('m_rapat');
-        $this->load->library('form_validation');        
+        $this->load->library('form_validation');
         $this->load->library('upload');
     	//$this->load->library('datatables');
     }
@@ -25,11 +25,6 @@ class meetpic extends CI_Controller {
         $this->load->view('templates/copyright');
         $this->load->view('templates/footer');
     }
-
-    /*public function json() {
-        header('Content-Type: application/json');
-        echo $this->m_rapat->json();
-    }*/
 
     public function add_meet(){
 
@@ -149,7 +144,6 @@ class meetpic extends CI_Controller {
 
             $this->m_rapat->update($this->input->post('ID_RAPAT', TRUE), $data);
             $this->session->set_flashdata('message', 'Update Record Success');
-            //echo implode (",", $data['update']);
             redirect(site_url('meetpic'));
         //}
     }

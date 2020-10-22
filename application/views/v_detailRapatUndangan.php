@@ -4,25 +4,13 @@
           <h3>
             <b>Detail Rapat </b>
           </h3>
-        </div>
-        <div class="row p-3 shadow-sm rounded bg-white my-3">
-          <a href="<?php echo base_url('meetpic'); ?>" class="btn btn-outline-danger"
-            >Penanggung Jawab</a
-          >
-          <a href="<?php echo base_url('meetinv'); ?>" class="btn btn-danger">Undangan</a>
-        </div>
+        </div>        
 
         <div class="row justify-content-center pt-1 shadow-sm rounded bg-white">
           <div class="col">
             <div class="row p-3">
               <div class="table-responsive">
-                <table class="table table-striped">
-                  <thead>
-                    <tr>
-                      <th></th>
-                      <th></th>
-                    </tr>
-                  </thead>
+                <table class="table table-striped">                  
                   <tbody>
                     <tr>
                       <th>Judul Rapat</th>
@@ -80,21 +68,82 @@
                   data-dismiss="modal"
                 >
                   <span class="p-2"><i class="fas fa-download"></i></span>
-                  Download
+                  Download MoM
                 </button>
-                <?php if ($show_button) { ?>
-                <a href="<?php echo base_url('meetinv/presensi_rapat').'/'.$ID_RAPAT?>">
+                <?php if ($show_button) { ?>                
                   <button
                     type="button"
-                    class="btn btn-outline-danger float-right"                    
+                    class="btn btn-outline-danger float-right"
+                    data-toggle="modal"
+                    data-target="#presensiInternalModal"                    
                   >
                     <span class="p-2">
                       <i class="fas fa-calendar-check"></i>
                     </span>
                     Presensi
-                  </button>
-                </a>
+                  </button>                
                 <?php } ?>
+                <div
+                class="modal fade"
+                id="presensiInternalModal"
+                tabindex="-1"
+                role="dialog"
+                aria-labelledby="exampleModalLabel"
+                aria-hidden="true"
+              >
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">
+                        <b>Bukti Rapat</b>
+                      </h5>
+                      <button
+                        type="button"
+                        class="close"
+                        data-dismiss="modal"
+                        aria-label="Close"
+                      >
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <form class="needs-validation" novalidate action="<?php echo site_url('meetinv/presensi_rapat_action');?>" method="post">
+                        <div class="mb-4">
+                          <label for="buktiRapat"><b>Masukkan Bukti Rapat</b></label>
+                          <input
+                            type="file"
+                            class="form-control"
+                            name="BUKTI_KEHADIRAN"
+                            id="buktiRapat"
+                            placeholder=""
+                            value=""
+                            accept="image/*"
+                            required
+                          />
+                        </div>
+
+                        <input type="hidden" name="ID_RAPAT" value="<?php echo $ID_RAPAT; ?>" /> 
+
+                        <!--<a href="detailrapatundangan.html">-->
+                          <button
+                            type="submit"
+                            class="btn btn-danger float-right ml-1"
+                          >
+                            Konfirmasi
+                          </button>
+                        <!--</a>-->
+                        <!--<button
+                          type="button"
+                          class="btn btn-secondary float-right"
+                          data-dismiss="modal"
+                        >
+                          Close
+                        </button>-->
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
               </div>
             </div>
           </div>
