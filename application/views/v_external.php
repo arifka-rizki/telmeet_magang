@@ -61,12 +61,14 @@
                     </button>
                   </form>
                   <div class="float-left">
-                    <button
+                    <a href="<?php echo base_url()?>">
+                      <button
                         type="submit"
                         class="btn btn-danger float-right ml-1 mb-3"
-                      > <span class="m-1"><i class="fas fa-arrow-left"></i></span>
+                      ><span class="m-1"><i class="fas fa-arrow-left"></i></span>
                         Kembali
                       </button>
+                    </a>
                   </div>
                 </div>
               </div>
@@ -185,6 +187,13 @@
                         type="radio"
                         class="custom-control-input"
                         value="l"
+                        <?php if(isset($user)){
+                          if($user->JENIS_KELAMIN == 'l'){
+                            echo 'checked';
+                          }
+                        } else{
+                          echo '';
+                        } ?>
                         required
                       />
                       <label class="custom-control-label" for="laki"
@@ -198,6 +207,13 @@
                         type="radio"
                         class="custom-control-input"
                         value="p"
+                        <?php if(isset($user)){
+                          if($user->JENIS_KELAMIN == 'p'){
+                            echo 'checked';
+                          }
+                        } else{
+                          echo '';
+                        } ?>
                         required
                       />
                       <label class="custom-control-label" for="perempuan"

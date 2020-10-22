@@ -52,7 +52,8 @@
                         name="TIPE_RAPAT"
                         type="radio"
                         class="custom-control-input"
-                        value="Review" <?php if ( $TIPE_RAPAT=="Review") echo "selected"; ?> 
+                        value="Review" 
+                        <?php if ( $TIPE_RAPAT=="Review") echo "checked"; ?> 
                         required
                       />
                       <label class="custom-control-label" for="review"
@@ -65,7 +66,8 @@
                         name="TIPE_RAPAT"
                         type="radio"
                         class="custom-control-input"
-                        value="Koordinasi" <?php if ( $TIPE_RAPAT=="Koordinasi") echo "selected"; ?>
+                        value="Koordinasi" 
+                        <?php if ( $TIPE_RAPAT=="Koordinasi") echo "checked"; ?>
                         required
                       />
                       <label class="custom-control-label" for="koordinasi"
@@ -78,7 +80,8 @@
                         name="TIPE_RAPAT"
                         type="radio"
                         class="custom-control-input"
-                        value="Briefing" <?php if ( $TIPE_RAPAT=="Briefing") echo "selected"; ?>
+                        value="Briefing" 
+                        <?php if ( $TIPE_RAPAT=="Briefing") echo "checked"; ?>
                         required
                       />
                       <label class="custom-control-label" for="briefing"
@@ -91,7 +94,8 @@
                         name="TIPE_RAPAT"
                         type="radio"
                         class="custom-control-input"
-                        value="Decision Making" <?php if ( $TIPE_RAPAT=="Decision Making") echo "selected"; ?>
+                        value="Decision Making" 
+                        <?php if ( $TIPE_RAPAT=="Decision Making") echo "checked"; ?>
                         required
                       />
                       <label class="custom-control-label" for="decision"
@@ -104,7 +108,8 @@
                         name="TIPE_RAPAT"
                         type="radio"
                         class="custom-control-input"
-                        value="Other" <?php if ( $TIPE_RAPAT=="Other") echo "selected"; ?>
+                        value="Other" 
+                        <?php if ( $TIPE_RAPAT=="Other") echo "checked"; ?>
                         required
                       />
                       <label class="custom-control-label" for="other"

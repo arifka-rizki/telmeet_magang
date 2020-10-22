@@ -154,7 +154,7 @@
                         <!--modal-->
                       </td>
                       <td>
-                        <a href="<?php echo base_url('meetpic/download_rapat').'/'.$val->ID_RAPAT ?>">
+                        <a href="<?php echo base_url('meetpic/download_rapat').'/'.$val->ID_RAPAT ?>" target="_blank">
                           <button class="btn btn-outline-danger px-2 py-1">
                             <i class="fas fa-download"></i>
                           </button>

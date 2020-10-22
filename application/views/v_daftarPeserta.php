@@ -11,7 +11,10 @@
             <div class="row py-2">
               <div class="col-md-6 col-sm-12">
                 <h5><b> <?php echo $NAMA_RAPAT?></b></h5>
-                <p><?php echo $TANGGAL; echo " "; echo $WAKTU_MULAI?></p>
+                <p><?php 
+                  $datestring = 'l, d F Y';
+                  echo date($datestring, strtotime($TANGGAL)) . " " . $WAKTU_MULAI;
+                  ?></p>
               </div>
               <div class="col-md-6 col-sm-12"></div>
             </div>

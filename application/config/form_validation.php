@@ -60,34 +60,80 @@ $config = array(
                 'required' => 'Masukkan Bukti Kehadiran Anda'
             )
         )
-        // array(
-        //     'field' => 'email',
-        //     'label' => 'Email',
-        //     'rules' => 'required|valid_email',
-        //     'errors' => array(
-        //         'required' => 'Masukkan Email Anda',
-        //         'valid_email' => 'Masukkan Email valid'
-        //     )
-        // ),
-        // array(
-        //     'field' => 'kodeRapat',
-        //     'label' => 'Kode Rapat',
-        //     'rules' => 'required',
-        //     'errors' => array(
-        //         'required' => 'Masukkan Koder Rapat'
-        //     )
-        // )
     ),
-    // 'group_two' => array(
-    //     array(
-    //         'field' => 'min_text_field',
-    //         'label' => 'Text Field Two',
-    //         'rules' => 'required|min_length[8]'
-    //     ),
-    //     array(
-    //         'field' => 'max_text_field',
-    //         'label' => 'Text Field Three',
-    //         'rules' => 'required|max_length[20]'
-    //     )
-    // )
+    'tambah_rapat' => array(
+        array(
+            'field' => 'NAMA_RAPAT',
+            'label' => 'Judul Rapat',
+            'rules' => 'required',
+            'errors' => array(
+                'required' => 'Masukkan Judul Rapat'
+            )
+        ),
+        array(
+            'field' => 'NOTA_DINAS',
+            'label' => 'Nota Dinas',
+            'rules' => 'required',
+            'errors' => array(
+                'required' => 'Masukkan Nomor Nota Dinas'
+            )
+        ),
+        array(
+            'field' => 'TIPE_RAPAT',
+            'label' => 'Tipe Rapat',
+            'rules' => 'required',
+            'errors' => array(
+                'required' => 'Masukkan Tipe Rapat'
+            )
+        ),
+        array(
+            'field' => 'PENGUNDANG',
+            'label' => 'Pengundang',
+            'rules' => 'required',
+            'errors' => array(
+                'required' => 'Masukkan Nama Pengundang Rapat'
+            )
+        ),
+        array(
+            'field' => 'TANGGAL',
+            'label' => 'Tanggal',
+            'rules' => 'required',
+            'errors' => array(
+                'required' => 'Masukkan Tanggal Rapat'
+            )
+        ),
+        array(
+            'field' => 'WAKTU_MULAI',
+            'label' => 'Waktu Mulai',
+            'rules' => 'required',
+            'errors' => array(
+                'required' => 'Masukkan Waktu Mulai Rapat'
+            )
+        ),
+        array(
+            'field' => 'WAKTU_SELESAI',
+            'label' => 'Waktu Selesai',
+            'rules' => 'required',
+            'errors' => array(
+                'required' => 'Masukkan Waktu Selesai Rapat'
+            )
+        ),
+        array(
+            'field' => 'NOTULEN',
+            'label' => 'Notulen',
+            'rules' => 'required',
+            'errors' => array(
+                'required' => 'Masukkan Nama Notulen'
+            )
+        ),
+        array(
+            'field' => 'TEMPAT',
+            'label' => 'Lokasi Rapat',
+            'rules' => 'required',
+            'errors' => array(
+                'required' => 'Masukkan Lokasi Rapat'
+            )
+        )
+    ),
+    
 );
