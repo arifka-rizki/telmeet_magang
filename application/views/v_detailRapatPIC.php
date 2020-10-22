@@ -4,23 +4,13 @@
           <h3>
             <b>Detail Rapat </b>
           </h3>
-        </div>
-        <div class="row p-3 shadow-sm rounded bg-white my-3">
-          <a href="<?php echo base_url('meetpic'); ?>" class="btn btn-danger">Penanggung Jawab</a>
-          <a href="<?php echo base_url('meetinv'); ?>" class="btn btn-outline-danger">Undangan</a>
-        </div>
+        </div>        
 
         <div class="row justify-content-center pt-1 shadow-sm rounded bg-white">
           <div class="col">
             <div class="row p-3">
               <div class="table-responsive">
-                <table class="table table-striped">
-                  <thead>
-                    <tr>
-                      <th></th>
-                      <th></th>
-                    </tr>
-                  </thead>
+                <table class="table table-striped">                  
                   <tbody>
                   <tr>
                       <th>Judul Rapat</th>
@@ -74,9 +64,9 @@
                   data-dismiss="modal"
                 >
                   <span class="p-2"><i class="fas fa-download"></i></span>
-                  Download
+                  Download MoM
                 </button>
-                <a href="">
+                <a href="<?php echo base_url('meetpic/daftar_peserta').'/'.$ID_RAPAT?>">
                   <button
                     type="button"
                     class="btn btn-outline-danger float-right ml-1"
@@ -157,7 +147,7 @@
                     class="btn btn-outline-danger float-right ml-1"
                   >
                     <span class="p-2">
-                      <i class="fas fa-wrench"></i>
+                      <i class="fas fa-pencil-alt"></i>
                     </span>
                     Ubah
                   </button>

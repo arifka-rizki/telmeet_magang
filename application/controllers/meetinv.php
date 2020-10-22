@@ -91,12 +91,13 @@ class meetinv extends CI_Controller {
     {
         $kode = $this->input->post('kodeRapat', TRUE);
         $row = $this->m_rapat->get_by_kode($kode);
+        $user = $this->session->userdata("nik");
         
         if($row)
         {
             $data_pic = $this->m_users->get_by_id($row->NIK_PIC);
 
-            if($this->m_rapat->get_data_peserta_rapat($this->session->userdata("nik"),$row->ID_RAPAT))
+            if($this->m_rapat->get_data_peserta_rapat($this->session->userdata("nik"),$row->ID_RAPAT)||$user == $row->NIK_PIC)
             {
                 $button = FALSE;
             }
@@ -134,9 +135,12 @@ class meetinv extends CI_Controller {
         }
     }
 
-    public function presensi_rapat($id)
+    public function presensi_rapat_action()
     {
-        $this->m_rapat->join_rapat($id,$this->session->userdata("nik"));
+        $bukti_kehadiran = $this->input->post('BUKTI_KEHADIRAN');
+        $id = $this->input->post('ID_RAPAT');
+        
+        $this->m_rapat->join_rapat($id,$this->session->userdata("nik"),$bukti_kehadiran);
         redirect(site_url('meetinv'));
     }
 }
