@@ -10,8 +10,8 @@
           <div class="col">
             <div class="row py-2">
               <div class="col-md-6 col-sm-12">
-                <h5><b> Rapat (input) Perencanaan</b></h5>
-                <p>20/20/2020 20:29 AM</p>
+                <h5><b> <?php echo $NAMA_RAPAT?></b></h5>
+                <p><?php echo $TANGGAL; echo " "; echo $WAKTU_MULAI?></p>
               </div>
               <div class="col-md-6 col-sm-12"></div>
             </div>
@@ -28,12 +28,15 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr class="border">
-                      <td>1</td>
-                      <td>Mr X kadal</td>
-                      <td>12/02/30 01.01 AM</td>
-                      <td></td>
-                    </tr>
+                    <!--<?php var_dump($data)?>-->
+                      <tr class="border">
+                      <?php foreach ($data as $key => $val): ?>
+                        <td><?php echo $key+1 ?></td>
+                        <td><?php echo $val->NAMA; ?></td>
+                        <td><?php echo $val->WAKTU_PRESENSI ?></td>
+                        <td><?php echo $val->BUKTI_KEHADIRAN ?></td>
+                      </tr>
+                    <?php endforeach;?>
                   </tbody>
                 </table>
               </div>

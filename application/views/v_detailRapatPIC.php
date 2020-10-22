@@ -31,6 +31,10 @@
                       <td><?php echo $NOTA_DINAS;?></td>
                     </tr>
                     <tr>
+                      <th>Kode Rapat</th>
+                      <td><?php echo $KODE_RAPAT;?></td>
+                    </tr>
+                    <tr>
                       <th>Tipe Rapat</th>
                       <td><?php echo $TIPE_RAPAT;?></td>
                     </tr>
@@ -57,11 +61,7 @@
                     <tr>
                       <th>Penandatangan Rapat</th>
                       <td><?php echo $PENANDATANGAN;?></td>
-                    </tr>
-                    <tr>
-                      <th>Kode Rapat</th>
-                      <td><?php echo $KODE_RAPAT;?></td>
-                    </tr>
+                    </tr>                    
                   </tbody>
                 </table>
               </div>

@@ -4,12 +4,21 @@
 /**
 * 
 */
+
+if (!defined('BASEPATH'))
+    exit('No direct script access allowed');
+
 class m_users extends CI_Model
 {
 	
 	private $table_name = "tb_users";
 
-	private $primary = "ID_USER";
+	private $primary = "NIK";
+
+	function __construct()
+    {
+        parent::__construct();
+    }
 
 	function get_all($group_user){
 
