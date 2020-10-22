@@ -100,9 +100,11 @@
                         </button>
                       </td>
                       <td>
-                        <button class="btn btn-outline-danger px-2 py-1">
-                          <i class="fas fa-download"></i>
-                        </button>
+                        <a href="<?php echo base_url('meetpic/download_rapat').'/'.$val->ID_RAPAT ?>">
+                          <button class="btn btn-outline-danger px-2 py-1">
+                            <i class="fas fa-download"></i>
+                          </button>
+                        </a>
                       </td>
                     </tr>
                     <?php endforeach ?>

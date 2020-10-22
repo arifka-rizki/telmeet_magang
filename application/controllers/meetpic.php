@@ -259,4 +259,49 @@ class meetpic extends CI_Controller {
         }
         else redirect('meetpic');
     }
+    public function download_rapat($id)
+    {   
+        $mpdf = new \Mpdf\Mpdf(['mode' => 'utf-8', 'format' => 'A4']);
+
+        $row = $this->m_rapat->get_by_id($id);
+        
+        if ($row) {
+            $data = array(
+                'ID_RAPAT' => set_value('ID_RAPAT', $row->ID_RAPAT),
+        		'NIK_PIC' => set_value('NIK_PIC', $row->NIK_PIC),
+                'KODE_RAPAT' => set_value('KODE_RAPAT', $row->KODE_RAPAT),
+                'NAMA_RAPAT' => set_value('NAMA_RAPAT', $row->NAMA_RAPAT),
+                'TANGGAL' => set_value('TANGGAL', $row->TANGGAL),
+                'WAKTU_MULAI' => set_value('WAKTU_MULAI', $row->WAKTU_MULAI),
+                'WAKTU_SELESAI' => set_value('WAKTU_SELESAI', $row->WAKTU_SELESAI),
+                'TEMPAT' => set_value('TEMPAT', $row->TEMPAT),
+                'TIPE_RAPAT' => set_value('TIPE_RAPAT', $row->TIPE_RAPAT),
+                'NOTULEN' => set_value('NOTULEN', $row->NOTULEN),
+                'STATUS' => set_value('STATUS', $row->STATUS),
+                'PENANDATANGAN' => set_value('PENANDATANGAN', $row->PENANDATANGAN),
+                'PENGUNDANG' => set_value('PENGUNDANG', $row->PENGUNDANG),
+                'NOTA_DINAS' => set_value('NOTA_DINAS', $row->NOTA_DINAS),
+                'NOTULENSI' => set_value('NOTULENSI', $row->NOTULENSI),
+	        );
+            $this->load->view('v_detailRapatPIC',$data);
+            $mpdf->showImageErrors = true;
+            $solo = $this->load->view('v_laporan', [], TRUE);
+            $mpdf->WriteHTML($solo);
+            $mpdf->AddPage();
+            $soli = $this->load->view('v_laporanDua', [], TRUE);
+            $mpdf->WriteHTML($soli);
+            $mpdf->AddPage();
+            $sola = $this->load->view('v_laporanPeserta', [], TRUE);
+            $mpdf->WriteHTML($sola);
+            $mpdf->Output();
+        } else {
+            $this->session->set_flashdata('message', 'Record Not Found');
+            redirect(site_url('meetpic'));
+        }
+        
+
+        
+      
+    }
+
 }
