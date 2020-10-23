@@ -28,7 +28,7 @@ class auth extends CI_Controller {
         if($this->form_validation->run()==false){
             $data['page_title'] = 'TelkomMeet';
 
-            $this->load->view('templates/header');
+            $this->load->view('templates/header', $data);
             $this->load->view('v_login');
             $this->load->view('templates/footer');
         } else{
@@ -43,7 +43,8 @@ class auth extends CI_Controller {
             if($check > 0){
                 $data_session=array(
                     'nik' => $nik,
-                    'status' => "login"
+                    'status' => "login",
+                    'nama' => $this->m_login->get_name($nik)->NAMA
                 );
 
                 $this->session->set_userdata($data_session);
@@ -58,5 +59,31 @@ class auth extends CI_Controller {
     public function logout(){
         $this->session->sess_destroy();
         redirect(base_url("auth"));
+    }
+
+    public function view_profil(){
+        $this->load->model('m_users');
+        $nik = $this->session->userdata('nik');
+        $user = $this->m_users->get_by_nik_email($nik);
+        $data = array(
+            'page_title' => 'Profil',
+            'NAMA' => $user->NAMA,
+            'NIK' => $user->NIK,
+            'JENIS_KELAMIN' => $user->JENIS_KELAMIN,
+            'INSTANSI' => $user->INSTANSI,
+            'JABATAN' => $user->JABATAN,
+            'NO_TELEPON' => $user->NO_TELEPON,
+            'EMAIL' => $user->EMAIL,
+        );
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/navbar');
+        $this->load->view('v_profil', $data);
+        $this->load->view('templates/copyright');
+        $this->load->view('templates/footer');
+    }
+
+    public function update_profil(){
+        echo 'On Progress';
     }
 }

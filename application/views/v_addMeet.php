@@ -13,39 +13,43 @@
               <div class="row">
                 <div class="col-md-6 px-3">
                   <div class="mb-3">
-                    <label for="judulRapat"><b>Judul Rapat</b></label>
+                    <label for="judulRapat"><b>Judul Rapat*</b></label>
                     <input
                       type="text"
                       class="form-control"
                       id="judulRapat"
                       name="NAMA_RAPAT"
                       placeholder=""
-                      value="<?php echo $NAMA_RAPAT; ?>"
+                      value="<?php if(isset($NAMA_RAPAT)){
+                        echo $NAMA_RAPAT;
+                      }else{
+                        echo set_value('NAMA_RAPAT');
+                      }?>"
                       required
                     />
-                    <div class="invalid-feedback">
-                      Tolong masukkan nama yang valid
-                    </div>
+                    <?php echo form_error('NAMA_RAPAT', '<p class = "alert alert-danger" role="alert">', '</p>'); ?>
                   </div>
 
                   <div class="mb-3">
-                    <label for="notaDinas"><b>Nota Dinas</b></label>
+                    <label for="notaDinas"><b>Nota Dinas*</b></label>
                     <input
                       type="text"
                       class="form-control"
                       id="notaDinas"
                       name="NOTA_DINAS"
                       placeholder=""
-                      value="<?php echo $NOTA_DINAS; ?>"
+                      value="<?php if(isset($NOTA_DINAS)){
+                        echo $NOTA_DINAS;
+                      }else{
+                        echo set_value('NOTA_DINAS');
+                      }?>"
                       required
                     />
-                    <div class="invalid-feedback">
-                      Tolong masukkan nota dinas yang valid
-                    </div>
+                    <?php echo form_error('NOTA_DINAS', '<p class = "alert alert-danger" role="alert">', '</p>'); ?>
                   </div>
 
                   <div class="d-block my-3">
-                    <h6 class="mb-3"><b>Tipe Rapat</b></h6>
+                    <h6 class="mb-3"><b>Tipe Rapat*</b></h6>
                     <div class="custom-control custom-radio">
                       <input
                         id="review"
@@ -116,28 +120,31 @@
                         >Other
                       </label>
                     </div>
+                    <?php echo form_error('TIPE_RAPAT', '<p class = "alert alert-danger" role="alert">', '</p>'); ?>
                   </div>
 
                   <div class="mb-3">
-                    <label for="pengundang"> <b>Pengundang Rapat</b></label>
+                    <label for="pengundang"> <b>Pengundang Rapat*</b></label>
                     <input
                       type="text"
                       class="form-control"
                       id="pengundang"
                       name="PENGUNDANG"
                       placeholder=""
-                      value="<?php echo $PENGUNDANG; ?>"
+                      value="<?php if(isset($PENGUNDANG)){
+                        echo $PENGUNDANG;
+                      }else{
+                        echo set_value('PENGUNDANG');
+                      }?>"
                       required
                     />
-                    <div class="invalid-feedback">
-                      Tolong masukkan NIK yang valid.
-                    </div>
+                    <?php echo form_error('PENGUNDANG', '<p class = "alert alert-danger" role="alert">', '</p>'); ?>
                   </div>
                 </div>
 
                 <div class="col-md-6 px-3">
                   <div class="mb-3">
-                    <label for="tanggal"><b>Hari Tanggal</b></label>
+                    <label for="tanggal"><b>Hari Tanggal*</b></label>
                     <input
                       type="date"
                       min="2015-01-01"
@@ -146,17 +153,19 @@
                       id="tanggal"
                       name="TANGGAL"
                       placeholder=""
-                      value="<?php echo $TANGGAL; ?>"
+                      value="<?php if(isset($TANGGAL)){
+                        echo $TANGGAL;
+                      }else{
+                        echo set_value('TANGGAL');
+                      }?>"
                       required
                     />
-                    <div class="invalid-feedback">
-                      Tolong masukkan nama yang valid
-                    </div>
+                    <?php echo form_error('TANGGAL', '<p class = "alert alert-danger" role="alert">', '</p>'); ?>
                   </div>
 
                   <div class="row">
                     <div class="col mb-3">
-                      <label for="waktuMulai"><b>Waktu Mulai</b></label>
+                      <label for="waktuMulai"><b>Waktu Mulai* (AM/PM)</b></label>
                       <input
                         type="time"
                         min="00-00-00"
@@ -165,15 +174,17 @@
                         id="wakruMulai"
                         name="WAKTU_MULAI"
                         placeholder=""
-                        value="<?php echo $WAKTU_MULAI; ?>"
+                        value="<?php if(isset($WAKTU_MULAI)){
+                        echo $WAKTU_MULAI;
+                      }else{
+                        echo set_value('WAKTU_MULAI');
+                      }?>"
                         required
                       />
-                      <div class="invalid-feedback">
-                        Tolong masukkan nama yang valid
-                      </div>
+                      <?php echo form_error('WAKTU_MULAI', '<p class = "alert alert-danger" role="alert">', '</p>'); ?>
                     </div>
                     <div class="col mb-3">
-                      <label for="waktuSelesai"><b>Waktu Selesai</b></label>
+                      <label for="waktuSelesai"><b>Waktu Selesai* (AM/PM)</b></label>
                       <input
                         type="time"
                         min="00-00-00"
@@ -182,45 +193,51 @@
                         id="waktuSelesai"
                         name="WAKTU_SELESAI"
                         placeholder=""
-                        value="<?php echo $WAKTU_SELESAI; ?>"
+                        value="<?php if(isset($WAKTU_SELESAI)){
+                        echo $WAKTU_SELESAI;
+                      }else{
+                        echo set_value('WAKTU_SELESAI');
+                      }?>"
                         required
                       />
-                      <div class="invalid-feedback">
-                        Tolong masukkan nama yang valid
-                      </div>
+                      <?php echo form_error('WAKTU_SELESAI', '<p class = "alert alert-danger" role="alert">', '</p>'); ?>
                     </div>
                   </div>
 
                   <div class="mb-3">
-                    <label for="notulen"><b>Notulen</b></label>
+                    <label for="notulen"><b>Notulen*</b></label>
                     <input
                       type="text"
                       class="form-control"
                       id="notulen"
                       name="NOTULEN"
                       placeholder=""
-                      value="<?php echo $NOTULEN; ?>"
+                      value="<?php if(isset($NOTULEN)){
+                        echo $NOTULEN;
+                      }else{
+                        echo set_value('NOTULEN');
+                      }?>"
                       required
                     />
-                    <div class="invalid-feedback">
-                      Tolong masukkan nama yang valid
-                    </div>
+                    <?php echo form_error('NOTULEN', '<p class = "alert alert-danger" role="alert">', '</p>'); ?>
                   </div>
 
                   <div class="mb-3">
-                    <label for="lokasiRapat"><b>Lokasi Rapat</b></label>
+                    <label for="lokasiRapat"><b>Lokasi Rapat*</b></label>
                     <input
                       type="text"
                       class="form-control"
                       id="lokasiRapat"
                       name="TEMPAT"
                       placeholder=""
-                      value="<?php echo $TEMPAT; ?>"
+                      value="<?php if(isset($TEMPAT)){
+                        echo $TEMPAT;
+                      }else{
+                        echo set_value('TEMPAT');
+                      }?>"
                       required
                     />
-                    <div class="invalid-feedback">
-                      Tolong masukkan nama yang valid
-                    </div>
+                    <?php echo form_error('TEMPAT', '<p class = "alert alert-danger" role="alert">', '</p>'); ?>
                   </div>
 
                   <div class="mb-3">
@@ -231,12 +248,13 @@
                       id="penandatangan"
                       name="PENANDATANGAN"
                       placeholder=""
-                      value="<?php echo $PENANDATANGAN; ?>"
+                      value="<?php if(isset($PENANDATANGAN)){
+                        echo $PENANDATANGAN;
+                      }else{
+                        echo set_value('PENANDATANGAN');
+                      }?>"
                       required
                     />
-                    <div class="invalid-feedback">
-                      Tolong masukkan nama yang valid
-                    </div>
                   </div>
                 </div>
               </div>

@@ -12,14 +12,15 @@ class meetpic extends CI_Controller {
         }
 
         $this->load->model('m_rapat');
-        $this->load->library('form_validation');
         $this->load->library('upload');
     	//$this->load->library('datatables');
     }
 
     public function index(){
-        $data['data']=$this->m_rapat->get_by_pic($this->session->userdata("nik"));
-        $this->load->view('templates/header');
+        $data['data'] = $this->m_rapat->get_by_pic($this->session->userdata("nik"));
+        $data['page_title'] = 'Dashboard PIC';
+
+        $this->load->view('templates/header', $data);
         $this->load->view('templates/navbar');
         $this->load->view('v_dashboardpic',$data);
         $this->load->view('templates/copyright');
@@ -29,25 +30,25 @@ class meetpic extends CI_Controller {
     public function add_meet(){
 
         $data = array(
+            'page_title' => 'Tambah Rapat',
             'button' => 'Tambah Rapat',
             'action' => site_url('meetpic/add_meet_action'),
             'ID_RAPAT' => set_value('ID_RAPAT'),
-            'NIK_PIC' => set_value('NIK_PIC'),
-    	    'KODE_RAPAT' => set_value('KODE_RAPAT'),
-    	    'NAMA_RAPAT' => set_value('NAMA_RAPAT'),
-    	    'TANGGAL' => set_value('TANGGAL'),
-    	    'WAKTU_MULAI' => set_value('WAKTU_MULAI'),
-    	    'WAKTU_SELESAI' => set_value('WAKTU_SELESAI'),
-    	    'TEMPAT' => set_value('TEMPAT'),
+            // 'NIK_PIC' => set_value('NIK_PIC'),
+    	    // 'KODE_RAPAT' => set_value('KODE_RAPAT'),
+    	    // 'TANGGAL' => set_value('TANGGAL'),
+    	    // 'WAKTU_MULAI' => set_value('WAKTU_MULAI'),
+    	    // 'WAKTU_SELESAI' => set_value('WAKTU_SELESAI'),
+    	    // 'TEMPAT' => set_value('TEMPAT'),
             'TIPE_RAPAT' => set_value('TIPE_RAPAT'),
-            'NOTULEN' => set_value('NOTULEN'),
-            'STATUS' => set_value('STATUS'),
-            'PENANDATANGAN' => set_value('PENANDATANGAN'),
-    	    'PENGUNDANG' => set_value('PENGUNDANG'),
-	        'NOTA_DINAS' => set_value('NOTA_DINAS'),
+            // 'NOTULEN' => set_value('NOTULEN'),
+            // 'STATUS' => set_value('STATUS'),
+            // 'PENANDATANGAN' => set_value('PENANDATANGAN'),
+    	    // 'PENGUNDANG' => set_value('PENGUNDANG'),
+	        // 'NOTA_DINAS' => set_value('NOTA_DINAS'),
         );
         
-        $this->load->view('templates/header');
+        $this->load->view('templates/header', $data);
         $this->load->view('templates/navbar');
         $this->load->view('v_addmeet', $data);
         $this->load->view('templates/copyright');
@@ -56,26 +57,46 @@ class meetpic extends CI_Controller {
     
     public function add_meet_action() 
     {
+        if($this->form_validation->run('tambah_rapat_PIC') == false)
+        {
+            $data = array(
+                'page_title' => 'Tambah Rapat',
+                'button' => 'Tambah Rapat',
+                'action' => site_url('meetpic/add_meet_action'),    
+                'ID_RAPAT' => set_value('ID_RAPAT'),
+                'TIPE_RAPAT' => set_value('TIPE_RAPAT'),
+            );
+
+            // $data['page_title'] = 'Tambah Rapat';
+            // $data['button'] = 'Tambah Rapat';
+            // $data['action'] = site_url('meetpic/add_meet_action');
+
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/navbar');
+            $this->load->view('v_addmeet', $data);
+            $this->load->view('templates/copyright');
+            $this->load->view('templates/footer');
+        } else{
             $data["data"] = array(
                 'NIK_PIC' => $this->session->userdata("nik"),
-        		'KODE_RAPAT' => $this->m_rapat->generate_code(),
-        		'NAMA_RAPAT' => $this->input->post('NAMA_RAPAT',TRUE),
-        		'TANGGAL' => $this->input->post('TANGGAL',TRUE),
-        		'WAKTU_MULAI' => $this->input->post('WAKTU_MULAI',TRUE),
-        		'WAKTU_SELESAI' => $this->input->post('WAKTU_SELESAI',TRUE),
-        		'TEMPAT' => $this->input->post('TEMPAT',TRUE),
+                'KODE_RAPAT' => $this->m_rapat->generate_code(),
+                'NAMA_RAPAT' => $this->input->post('NAMA_RAPAT',TRUE),
+                'TANGGAL' => $this->input->post('TANGGAL',TRUE),
+                'WAKTU_MULAI' => $this->input->post('WAKTU_MULAI',TRUE),
+                'WAKTU_SELESAI' => $this->input->post('WAKTU_SELESAI',TRUE),
+                'TEMPAT' => $this->input->post('TEMPAT',TRUE),
                 'TIPE_RAPAT' => $this->input->post('TIPE_RAPAT',TRUE),
                 'NOTULEN' => $this->input->post('NOTULEN',TRUE),
                 'STATUS' => "0",
                 'PENANDATANGAN' => $this->input->post('PENANDATANGAN',TRUE),
-        		'PENGUNDANG' => $this->input->post('PENGUNDANG',TRUE),
-        		'NOTA_DINAS' => $this->input->post('NOTA_DINAS',TRUE),
-    	    );
+                'PENGUNDANG' => $this->input->post('PENGUNDANG',TRUE),
+                'NOTA_DINAS' => $this->input->post('NOTA_DINAS',TRUE),
+            );
             
             $this->m_rapat->insert($data);
             $this->session->set_flashdata('message', 'Create Record Success');
             redirect(site_url('meetpic'));
-        //}
+        }
     }
 
     public function add_hasilmeet($id){
@@ -127,6 +148,7 @@ class meetpic extends CI_Controller {
 
         if ($row) {
             $data = array(
+                'page_title' => 'Tambah Rapat',
                 'button' => 'Edit Rapat',
                 'action' => site_url('meetpic/update_action'),
         		'ID_RAPAT' => $row->ID_RAPAT,
@@ -144,7 +166,7 @@ class meetpic extends CI_Controller {
                 'NOTA_DINAS' => $row->NOTA_DINAS,
             );
             
-            $this->load->view('templates/header');
+            $this->load->view('templates/header', $data);
             $this->load->view('templates/navbar');
             $this->load->view('v_addmeet', $data);
             $this->load->view('templates/copyright');
@@ -225,6 +247,7 @@ class meetpic extends CI_Controller {
         
         if ($row) {
             $data = array(
+                'Page_title' => 'Detail Rapat ' . $row->NAMA_RAPAT,
                 'ID_RAPAT' => set_value('ID_RAPAT', $row->ID_RAPAT),
         		'NIK_PIC' => set_value('NIK_PIC', $row->NIK_PIC),
                 'KODE_RAPAT' => set_value('KODE_RAPAT', $row->KODE_RAPAT),
@@ -240,7 +263,7 @@ class meetpic extends CI_Controller {
                 'PENGUNDANG' => set_value('PENGUNDANG', $row->PENGUNDANG),
                 'NOTA_DINAS' => set_value('NOTA_DINAS', $row->NOTA_DINAS),
 	        );
-            $this->load->view('templates/header');
+            $this->load->view('templates/header', $data);
             $this->load->view('templates/navbar');
             $this->load->view('v_detailRapatPIC',$data);
             $this->load->view('templates/copyright');
@@ -256,8 +279,9 @@ class meetpic extends CI_Controller {
     {
         $keyword = $this->input->post('keyword',TRUE);
         $data['data'] = $this->m_rapat->search_pic($keyword,$this->session->userdata("nik"));
+        $data['page_title'] = 'Dashboard PIC';
 
-        $this->load->view('templates/header');
+        $this->load->view('templates/header', $data);
         $this->load->view('templates/navbar');
         $this->load->view('v_dashboardpic',$data);
         $this->load->view('templates/copyright');
@@ -270,7 +294,8 @@ class meetpic extends CI_Controller {
         $peserta = $this->m_rapat->get_peserta_rapat($id);
         
         if ($row) {
-            $data = array(                                    
+            $data = array(   
+                'page_title' => 'Daftar Peserta Rapat ' . $row->NAMA_RAPAT,                                 
                 'NAMA_RAPAT'=> $row->NAMA_RAPAT,
                 'TANGGAL' => $row->TANGGAL,
                 'WAKTU_MULAI' => $row->WAKTU_MULAI,
@@ -284,7 +309,7 @@ class meetpic extends CI_Controller {
                 'JABATAN' => set_value('JABATAN', $peserta->JABATAN),
             );*/
 
-            $this->load->view('templates/header');
+            $this->load->view('templates/header', $data);
             $this->load->view('templates/navbar');
             $this->load->view('v_daftarPeserta', $data);
             $this->load->view('templates/copyright');

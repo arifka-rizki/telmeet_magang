@@ -110,7 +110,7 @@
                   <div class="modal-content">
                     <div class="modal-header">
                       <h5 class="modal-title" id="exampleModalLabel">
-                        <b>Bukti Rapat</b>
+                        <b>Bukti Kehadiran Rapat</b>
                       </h5>
                       <button
                         type="button"
@@ -133,7 +133,7 @@
                             accept="image/*"
                             required
                           />
-                        </div>
+                        </div> -->
 
                         <input type="hidden" name="ID_RAPAT" value="<?php echo $ID_RAPAT; ?>" /> 
 

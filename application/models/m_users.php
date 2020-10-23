@@ -39,7 +39,7 @@ class m_users extends CI_Model
 	}
 
 
-	function get_by_nik_email($nik,$email){		
+	function get_by_nik_email($nik,$email = null){		
 		#Get data by nik or email
 		$this->db->where('NIK',$nik);
 		$this->db->or_where('EMAIL',$email);

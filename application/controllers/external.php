@@ -14,6 +14,7 @@ class external extends CI_Controller {
 
         $this->load->view('templates/header', $data);
         $this->load->view('v_external');
+        $this->load->view('templates/copyright');
         $this->load->view('templates/footer');
     }
 
@@ -28,6 +29,7 @@ class external extends CI_Controller {
 
             $this->load->view('templates/header', $data);
             $this->load->view('v_external');
+            $this->load->view('templates/copyright');
             $this->load->view('templates/footer');
         } else{
             $kodeRapat = $this->input->post('kodeRapat');
@@ -39,6 +41,7 @@ class external extends CI_Controller {
 
             $this->load->view('templates/header', $data);
             $this->load->view('v_external', $data);
+            $this->load->view('templates/copyright');
             $this->load->view('templates/footer');
         }
     }
@@ -55,6 +58,7 @@ class external extends CI_Controller {
             
             $this->load->view('templates/header', $data);
             $this->load->view('v_external', $data);
+            $this->load->view('templates/copyright');
             $this->load->view('templates/footer');
         } else{
             $nama = $this->input->post('nama');
@@ -81,13 +85,13 @@ class external extends CI_Controller {
             $meet = $this->m_external->check_meet($kodeRapat);
     
             $this->m_external->input_attendance($meet->ID_RAPAT, $nik, $buktiKehadiran);
-            $email_registered = $this->m_external->check_user($email);
-            if(!isset($email_registered)){
-                $this->m_external->add_user($user_data);
-                echo 'berhasil nambah user';   
-            } else{
-                echo 'tidak nambah user';
-            }
+            //$email_registered = $this->m_external->check_user($email);
+            $data['page_title'] = 'Presensi Berhasil';
+
+            $this->load->view('templates/header', $data);
+            $this->load->view('v_afterlogin', $data);
+            $this->load->view('templates/copyright');
+            $this->load->view('templates/footer');
         }
     }
 }

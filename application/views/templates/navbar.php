@@ -15,14 +15,14 @@
                 aria-haspopup="true"
                 aria-expanded="true"
               >
-              <?php echo $this->session->userdata("nik"); ?>
+                <?php echo $this->session->userdata("nama"); ?>
               </a>
              
               <div
                 class="dropdown-menu dropdown-menu-right"
                 aria-labelledby="menuProfil"
               >
-                <a class="dropdown-item" href="profil.html"> Ubah Profil </a>
+                <a class="dropdown-item" href="<?= base_url('auth/view_profil') ?>"> Profil </a>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="<?php echo base_url('auth/logout'); ?>"> Sign Out </a>
               </div>

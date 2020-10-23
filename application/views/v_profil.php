@@ -5,7 +5,7 @@
         >
           <div class="col-md-6">
             <h4 class="my-3"><b>Identitas diri</b></h4>
-            <form class="needs-validation" novalidate>
+            <form class="needs-validation" novalidate method="POST" action="<?= base_url('auth/update_profil')?>">
               <div class="mb-3">
                 <label for="name"><b>Nama</b></label>
                 <input
@@ -13,7 +13,19 @@
                   class="form-control"
                   id="nama"
                   placeholder=""
-                  value=""
+                  value="<?= $NAMA?>"
+                  required
+                />
+              </div>
+
+              <div class="mb-3">
+                <label for="email"><b>Email</b></label>
+                <input
+                  type="email"
+                  class="form-control"
+                  id="email"
+                  placeholder=""
+                  value="<?= $EMAIL?>"
                   required
                 />
               </div>
@@ -26,6 +38,8 @@
                   id="nik"
                   placeholder=""
                   required
+                  value="<?= $NIK?>"
+                  readonly
                 />
               </div>
 
@@ -37,6 +51,7 @@
                     name="jenisKelamin"
                     type="radio"
                     class="custom-control-input"
+                    <?php if($JENIS_KELAMIN == 'l') echo 'checked'; ?>
                     required
                   />
                   <label class="custom-control-label" for="laki"
@@ -49,6 +64,7 @@
                     name="jenisKelamin"
                     type="radio"
                     class="custom-control-input"
+                    <?php if($JENIS_KELAMIN == 'p') echo 'checked'; ?>
                     required
                   />
                   <label class="custom-control-label" for="perempuan"
@@ -65,6 +81,7 @@
                   id="instansi"
                   placeholder=""
                   required
+                  value="<?= $INSTANSI?>"
                 />
               </div>
 
@@ -75,6 +92,7 @@
                   class="form-control"
                   id="jabatan"
                   placeholder=""
+                  value="<?= $JABATAN?>"
                   required
                 />
               </div>
@@ -86,17 +104,7 @@
                   class="form-control"
                   id="telefon"
                   placeholder=""
-                  required
-                />
-              </div>
-
-              <div class="mb-3">
-                <label for="email"><b>Email</b></label>
-                <input
-                  type="email"
-                  class="form-control"
-                  id="email"
-                  placeholder=""
+                  value="<?= $NO_TELEPON?>"
                   required
                 />
               </div>

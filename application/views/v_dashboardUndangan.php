@@ -42,6 +42,9 @@
                   Masuk Rapat
                 </button>
               </div>
+              <div class="col-md-6 col-sm-12 float-right">
+                <?php echo form_error('kodeRapat', '<p class = "alert alert-danger" role="alert">', '</p>'); ?>
+              </div>
               <div
                 class="modal fade"
                 id="masukkanKodeModal"
@@ -78,6 +81,7 @@
                             value=""
                             required
                           />
+                          
                         </div>
 
                         <!--<a href="detailrapatundangan.html">-->

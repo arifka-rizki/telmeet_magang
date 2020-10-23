@@ -61,7 +61,7 @@ $config = array(
             )
         )
     ),
-    'tambah_rapat' => array(
+    'tambah_rapat_PIC' => array(
         array(
             'field' => 'NAMA_RAPAT',
             'label' => 'Judul Rapat',
@@ -135,5 +135,35 @@ $config = array(
             )
         )
     ),
-    
+    'hasil_rapat' => array(
+        array(
+            'field' => 'resultRapat',
+            'label' => 'Result Rapat',
+            'rules' => 'required',
+            'errors' => array(
+                'required' => 'Masukkan Hasil Rapat'
+            )
+        )
+    ),
+    'tambah_rapat' => array(
+        array(
+            'field' => 'kodeRapat',
+            'label' => 'Kode Rapat',
+            'rules' => 'required|exact_length[8]',
+            'errors' => array(
+                'required' => 'Masukkan Kode Rapat',
+                'exact_length' => 'Kode Rapat Harus Berisi 8 Karakter'
+            )
+        )
+    ),
+    'bukti_rapat' => array(
+        array(
+            'field' => 'BUKTI_KEHADIRAN',
+            'label' => 'Bukti Kehadiran',
+            'rules' => 'required',
+            'errors' => array(
+                'required' => 'Masukkan Foto Bukti Kehadiran'
+            )
+        )
+    )
 );
