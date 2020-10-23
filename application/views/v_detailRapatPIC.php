@@ -1,9 +1,9 @@
     <main>
       <div class="container mt-5">
         <div class="row p-3 shadow-sm rounded bg-white my-3">
-          <h3>
+          <h5>
             <b>Detail Rapat </b>
-          </h3>
+          </h5>
         </div>        
 
         <div class="row justify-content-center pt-1 shadow-sm rounded bg-white">
@@ -57,35 +57,45 @@
               </div>
             </div>
             <div class="row p-3">
-              <div class="col">
+              <div class="col-md col-sm-12">
+              <a href="<?php echo site_url('meetpic')?>">
+                  <button
+                    type="button"
+                    class="btn btn-danger col-sm-12 float-left ml-0  mb-2"
+                    data-dismiss="modal"
+                  >
+                    <span class="p-1"><i class="fas fa-arrow-left"></i></span>
+                    Kembali
+                  </button>
+                </a>
+              </div>
+              <div class="col-md-10 col-sm-12">
                 <button
                   type="button"
-                  class="btn btn-danger float-right ml-1"
+                  class="btn btn-danger col-md-3 col-sm-12 float-right ml-1 mb-2"
                   data-dismiss="modal"
                 >
-                  <span class="p-2"><i class="fas fa-download"></i></span>
+                  <span class="p-1"><i class="fas fa-download"></i></span>
                   Download MoM
                 </button>
                 <a href="<?php echo base_url('meetpic/daftar_peserta').'/'.$ID_RAPAT?>">
                   <button
                     type="button"
-                    class="btn btn-outline-danger float-right ml-1"
+                    class="btn btn-outline-danger float-right ml-1 col-md-2 col-sm-12 mb-2 "
                   >
-                    <span class="p-2">
+                    <span class="p-1">
                       <i class="fas fa-user-alt"></i>
                     </span>
                     Peserta
                   </button>
                 </a>
-                
-                
                   <button
                     type="button"
-                    class="btn btn-outline-danger float-right ml-1"
+                    class="btn btn-outline-danger float-right ml-1 col-md-2 col-sm-12 mb-2"
                     data-toggle="modal"
                     data-target="#batalkanRapatModal"
                   >
-                    <span class="p-2">
+                    <span class="p-1">
                       <i class="fas fa-trash-alt"></i>
                     </span>
                     Batalkan
@@ -133,8 +143,6 @@
                             >
                               Kembali
                             </button>
-                          
-  
                       </div>
                     </div>
                   </div>
@@ -144,9 +152,9 @@
                 <a href="<?php echo base_url('meetpic/update').'/'.$ID_RAPAT ?>">
                   <button
                     type="button"
-                    class="btn btn-outline-danger float-right ml-1"
+                    class="btn col-md-2 col-sm-12  btn-outline-danger float-right ml-1 mb-2"
                   >
-                    <span class="p-2">
+                    <span class="p-1">
                       <i class="fas fa-pencil-alt"></i>
                     </span>
                     Ubah
@@ -156,12 +164,12 @@
                 <a href="<?php echo base_url('meetpic/add_hasilmeet').'/'.$ID_RAPAT ?>">
                   <button
                     type="button"
-                    class="btn btn-outline-danger float-right ml-1"
+                    class="btn col-md-2 col-sm-12  btn-outline-danger float-right ml-1 mb-2"
                   >
-                    <span class="p-2">
+                    <span class="p-1">
                       <i class="fas fa-clipboard"></i>
                     </span>
-                    Tambah Hasil Rapat
+                    Tambah Hasil 
                   </button>
                 </a>
               </div>
