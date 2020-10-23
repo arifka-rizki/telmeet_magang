@@ -153,7 +153,7 @@
                   </button>
                 </a>
                 
-                <a href="<?php echo base_url('meetpic/').'/'.$ID_RAPAT ?>">
+                <a href="<?php echo base_url('meetpic/add_hasilmeet').'/'.$ID_RAPAT ?>">
                   <button
                     type="button"
                     class="btn btn-outline-danger float-right ml-1"
