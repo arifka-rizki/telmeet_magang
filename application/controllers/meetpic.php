@@ -83,6 +83,49 @@ class meetpic extends CI_Controller {
             redirect(site_url('meetpic'));
         //}
     }
+
+    public function add_hasilmeet(){
+
+        $data = array(
+            'button' => 'Tambah Hasil Rapat',
+            'action' => site_url('meetpic/add_hasilmeet_action'),
+            
+            'ID_RAPAT' => set_value('ID_RAPAT'),
+           
+            'BACKGROUND' => set_value('BACKGROUND'),
+    	    'ACTION_PLAN' => set_value('ACTIION_PLAN'),
+            'RESULT' => set_value('RESULT'),
+            
+            
+        );
+        
+        $this->load->view('templates/header');
+        $this->load->view('templates/navbar');
+        $this->load->view('v_addHasilRapat', $data);
+        $this->load->view('templates/copyright');
+        $this->load->view('templates/footer');
+    }
+    
+    public function add_hasilmeet_action() 
+    {
+        //$this->_rules();
+
+        //if ($this->form_validation->run() == FALSE) {
+        //    $this->add_meet();
+        //} else {
+
+            $data["data"] = array(
+                
+                'BACKGROUND' => $this->input->post('BACKGROUND',TRUE),
+                'RESULT' => $this->input->post('RESULT',TRUE),
+                'ACTION_PLAN' => $this->input->post('ACTION_PLAN',TRUE),
+    	    );
+            
+            $this->m_rapat->insert($data);
+            $this->session->set_flashdata('message', 'Create Record Success');
+            redirect(site_url('meetpic'));
+        //}
+    }
     
     public function update($id) 
     {
@@ -296,7 +339,7 @@ class meetpic extends CI_Controller {
             $mpdf->AddPage();
             $sola = $this->load->view('v_laporanPeserta', $data, TRUE);
             $mpdf->WriteHTML($sola);
-            $mpdf->Output();
+            $mpdf->Output('','D');
         } else {
             $this->session->set_flashdata('message', 'Record Not Found');
             redirect(site_url('meetpic'));
