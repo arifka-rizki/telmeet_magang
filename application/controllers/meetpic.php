@@ -257,7 +257,11 @@ class meetpic extends CI_Controller {
     {   
         $mpdf = new \Mpdf\Mpdf(['mode' => 'utf-8', 'format' => 'A4']);
 
+        $peserta = $this->m_rapat->get_peserta_rapat($id);
+
         $row = $this->m_rapat->get_by_id($id);
+        
+        $pic = $this->m_rapat->get_data_pic($row->NIK_PIC);
         
         if ($row) {
             $data = array(
@@ -275,17 +279,22 @@ class meetpic extends CI_Controller {
                 'PENANDATANGAN' => set_value('PENANDATANGAN', $row->PENANDATANGAN),
                 'PENGUNDANG' => set_value('PENGUNDANG', $row->PENGUNDANG),
                 'NOTA_DINAS' => set_value('NOTA_DINAS', $row->NOTA_DINAS),
-                'NOTULENSI' => set_value('NOTULENSI', $row->NOTULENSI),
-	        );
-            $this->load->view('v_detailRapatPIC',$data);
+                'BACKGROUND' => set_value('BACKGROUND', $row->BACKGROUND),
+                'RESULT' => set_value('RESULT', $row->RESULT),
+                'ACTION_PLAN' => set_value('ACTION_PLAN', $row->ACTION_PLAN),
+                'NAMA' => set_value('NAMA', $pic->NAMA),
+            );
+            
+            $data['data'] = $peserta;
+            //$this->load->view('v_detailRapatPIC',$data);
             $mpdf->showImageErrors = true;
-            $solo = $this->load->view('v_laporan', [], TRUE);
+            $solo = $this->load->view('v_laporan', $data, TRUE);
             $mpdf->WriteHTML($solo);
             $mpdf->AddPage();
-            $soli = $this->load->view('v_laporanDua', [], TRUE);
+            $soli = $this->load->view('v_laporanDua', $data, TRUE);
             $mpdf->WriteHTML($soli);
             $mpdf->AddPage();
-            $sola = $this->load->view('v_laporanPeserta', [], TRUE);
+            $sola = $this->load->view('v_laporanPeserta', $data, TRUE);
             $mpdf->WriteHTML($sola);
             $mpdf->Output();
         } else {

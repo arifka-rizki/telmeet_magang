@@ -36,11 +36,10 @@
         text-align:center;
         ">
           <b>
-            Rapat xxx
+          <?php echo $NAMA_RAPAT?>
           </b>
         </td>
       </tr>
-      <div>
         <tr>
           <td style="width:300px">
             <b>
@@ -58,8 +57,20 @@
             </b>
           </td>
         </tr>
-      </div>
-      
+      <?php foreach ($data as $key => $val): ?>
+        <tr>
+          <td style="width:300px">            
+              <?php echo $val->NAMA; ?>
+          </td>
+          <td style="width:300px">
+              <?php echo $val->WAKTU_PRESENSI ?>
+          </td>
+          <td style="width:300px">
+            <!--<img src="<?php echo $val->BUKTI_KEHADIRAN ?>" alt="">-->
+              <?php echo $val->BUKTI_KEHADIRAN ?>
+          </td>
+        </tr>
+      <?php endforeach;?>
     </table>
   </div>
 

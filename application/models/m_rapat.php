@@ -44,6 +44,12 @@ class m_rapat extends CI_Model
         return $this->db->get($this->table)->result();
     }
 
+    function get_data_pic($pic)
+    {
+        $this->db->where('NIK', $pic);
+        return $this->db->get('tb_users')->row();
+    }
+
     //get rapat undangan
     function get_by_inv($inv)
     {
@@ -116,9 +122,9 @@ class m_rapat extends CI_Model
     }
 
     //get data user peserta rapat
-    function get_peserta_rapat($rapat)
+    function get_peserta_rapat($idrapat)
     {
-        $this->db->where('tb_peserta_rapat.ID_RAPAT',$rapat);
+        $this->db->where('tb_peserta_rapat.ID_RAPAT',$idrapat);
         $this->db->select('tb_users.NAMA, tb_peserta_rapat.WAKTU_PRESENSI, tb_peserta_rapat.BUKTI_KEHADIRAN');
         $this->db->from('tb_users');
         $this->db->join('tb_peserta_rapat', 'tb_peserta_rapat.NIK=tb_users.NIK','inner');
@@ -174,6 +180,25 @@ class m_rapat extends CI_Model
         $this->db->where($this->id, $id);
         $this->db->set('STATUS','1');
         $this->db->update($this->table);
+    }
+
+    private function _uploadImage()
+    {
+        $config['upload_path']          = './upload/presensi/';
+        $config['allowed_types']        = 'gif|jpg|png';
+        $config['file_name']            = $this->id.'_'.$this->inv;
+        $config['overwrite']			= true;
+        $config['max_size']             = 1024; // 1MB
+        // $config['max_width']            = 1024;
+        // $config['max_height']           = 768;
+
+        $this->load->library('upload', $config);
+
+        if ($this->upload->do_upload('image')) {
+            return $this->upload->data("file_name");
+        }
+        
+        return "default.jpg";
     }
     
     // get total rows

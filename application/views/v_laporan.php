@@ -24,8 +24,7 @@
           <img src="application/views/logo.jpg" alt="asdasdas"
             style="
             width:200px;
-            padding:10px 0px;
-            align: center"
+            padding:10px 0px;"
           >
         </td>
         <td 
@@ -103,7 +102,7 @@
               Type of meeting
             </b>
           </td>
-          <td colspan="3">Decision Making</td>
+          <td colspan="3"><?php echo $TIPE_RAPAT?></td>
         </tr>
         <tr>
           <td>
@@ -111,7 +110,7 @@
               Facilitator
             </b>
           </td>
-          <td colspan="3">asdasdasd</td>
+          <td colspan="3"><?php echo $NAMA?></td>
         </tr>
         <tr>
           <td>
@@ -141,6 +140,7 @@
       </td>
       <tr>
         <td style="height:450px; vertical-align: top;">
+          <?php echo $BACKGROUND ?>
         </td>
       </tr>
     </table>
@@ -159,6 +159,7 @@
       </td>
       <tr>
         <td style="height:450px; vertical-align: top;">
+          <?php echo $RESULT ?>
         </td>
       </tr>
     </table>        
