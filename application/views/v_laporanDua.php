@@ -29,6 +29,7 @@
         </td>
         <tr>
           <td style="height:750px; vertical-align: top;">
+            <?php echo $BACKGROUND ?>
           </td>
         </tr>
     </table>
