@@ -56,12 +56,6 @@ class meetpic extends CI_Controller {
     
     public function add_meet_action() 
     {
-        //$this->_rules();
-
-        //if ($this->form_validation->run() == FALSE) {
-        //    $this->add_meet();
-        //} else {
-
             $data["data"] = array(
                 'NIK_PIC' => $this->session->userdata("nik"),
         		'KODE_RAPAT' => $this->m_rapat->generate_code(),
@@ -84,47 +78,47 @@ class meetpic extends CI_Controller {
         //}
     }
 
-    public function add_hasilmeet(){
+    public function add_hasilmeet($id){
+        $row = $this->m_rapat->get_by_id($id);
 
-        $data = array(
-            'button' => 'Tambah Hasil Rapat',
-            'action' => site_url('meetpic/add_hasilmeet_action'),
+        if ($row) {
+            $data = array(
+                'button' => 'Edit Rapat',
+                'action' => site_url('meetpic/add_hasilmeet_action'),
+                
+                'ID_RAPAT' => $row->ID_RAPAT,
+        		
+                'BACKGROUND' => $row->BACKGROUND,
+                'ACTION_PLAN' => $row->ACTION_PLAN,
+                'RESULT' => $row->RESULT,
+            );
             
-            'ID_RAPAT' => set_value('ID_RAPAT'),
-           
-            'BACKGROUND' => set_value('BACKGROUND'),
-    	    'ACTION_PLAN' => set_value('ACTIION_PLAN'),
-            'RESULT' => set_value('RESULT'),
-            
-            
-        );
+            $this->load->view('templates/header');
+            $this->load->view('templates/navbar');
+            $this->load->view('v_addHasilRapat', $data);
+            $this->load->view('templates/copyright');
+            $this->load->view('templates/footer');
+        } 
         
-        $this->load->view('templates/header');
-        $this->load->view('templates/navbar');
-        $this->load->view('v_addHasilRapat', $data);
-        $this->load->view('templates/copyright');
-        $this->load->view('templates/footer');
+        else {
+            $this->session->set_flashdata('message', 'Record Not Found');
+            redirect(site_url('meetpic'));
+        }
     }
     
     public function add_hasilmeet_action() 
     {
-        //$this->_rules();
+        $data['update'] = array(
+       
+            'BACKGROUND' => $this->input->post('BACKGROUND',TRUE),
+            'ACTION_PLAN' => $this->input->post('ACTION_PLAN',TRUE),
+            'RESULT' => $this->input->post('RESULT',TRUE),
+        );
 
-        //if ($this->form_validation->run() == FALSE) {
-        //    $this->add_meet();
-        //} else {
-
-            $data["data"] = array(
-                
-                'BACKGROUND' => $this->input->post('BACKGROUND',TRUE),
-                'RESULT' => $this->input->post('RESULT',TRUE),
-                'ACTION_PLAN' => $this->input->post('ACTION_PLAN',TRUE),
-    	    );
-            
-            $this->m_rapat->insert($data);
-            $this->session->set_flashdata('message', 'Create Record Success');
-            redirect(site_url('meetpic'));
-        //}
+        $this->m_rapat->update($this->input->post('ID_RAPAT', TRUE), $data);
+        $this->session->set_flashdata('message', 'Update Record Success');
+        redirect(site_url('meetpic'));
+        
     }
     
     public function update($id) 
