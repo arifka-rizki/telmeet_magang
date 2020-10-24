@@ -46,14 +46,15 @@
             </div>
 
             <div class="row p-3">
-              <div class="col">
+              
+              <div class="col-md-2 col-sm-12 ">
                 <a href="<?php echo site_url('meetpic')?>">
                   <button
                     type="button"
-                    class="btn btn-danger float-left ml-1"
+                    class="btn btn-danger col-sm-12 float-left mb-2"
                     data-dismiss="modal"
                   >
-                    <span class="p-2"><i class="fas fa-arrow-left"></i></span>
+                    <span class="p-1"><i class="fas fa-arrow-left"></i></span>
                     Kembali
                   </button>
                 </a>

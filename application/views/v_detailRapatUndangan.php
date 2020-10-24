@@ -61,10 +61,22 @@
               </div>
             </div>
             <div class="row p-3">
-              <div class="col">
+            <div class="col-md col-sm-12">
+              <a href="<?php echo site_url('meetinv')?>">
+                  <button
+                    type="button"
+                    class="btn btn-danger col-sm-12 float-left ml-0  mb-2"
+                    data-dismiss="modal"
+                  >
+                    <span class="p-1"><i class="fas fa-arrow-left"></i></span>
+                    Kembali
+                  </button>
+                </a>
+              </div>
+              <div class="col-md-10 col-sm-12">
                 <button
                   type="button"
-                  class="btn btn-danger float-right ml-1"
+                  class="btn btn-danger col-md-3 col-sm-12 float-right ml-1 b mb-2"
                   data-dismiss="modal"
                 >
                   <span class="p-2"><i class="fas fa-download"></i></span>
@@ -73,7 +85,7 @@
                 <?php if ($show_button) { ?>                
                   <button
                     type="button"
-                    class="btn btn-outline-danger float-right"
+                    class="btn btn-outline-danger col-md-3 col-sm-12 float-right ml-1 b mb-2"
                     data-toggle="modal"
                     data-target="#presensiInternalModal"                    
                   >

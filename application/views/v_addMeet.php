@@ -242,15 +242,32 @@
               </div>
 
               <hr class="mb-4" />
-
-              <input type="hidden" name="ID_RAPAT" value="<?php echo $ID_RAPAT; ?>" /> 
-
-              <button
-                class="btn btn-danger btn-block col-md-2 mb-3 float-right"
-                type="submit"
-              >
-              <?php echo $button ?>
-              </button>
+              <div class="row" >
+                <div class="col-md-2 col-sm-12 ">
+                  <a href="<?php echo site_url('meetpic')?>">
+                    <button
+                      type="button"
+                      class="btn btn-danger col-sm-12 float-left mb-2"
+                      data-dismiss="modal"
+                    >
+                      <span class="p-1"><i class="fas fa-arrow-left"></i></span>
+                      Kembali
+                    </button>
+                  </a>
+                </div>
+                <div class="col-md-10 col-sm-12">
+                  <input type="hidden" name="ID_RAPAT" value="<?php echo $ID_RAPAT; ?>" /> 
+                
+                  <button
+                    class="btn btn-danger btn-block col-md-2 mb-3 float-right"
+                    type="submit"
+                  >
+               
+                  <?php echo $button ?>
+                  </button>
+                </div>
+              </div>
+             
             </form>
           </div>
         </div>
