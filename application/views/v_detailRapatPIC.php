@@ -70,14 +70,16 @@
                 </a>
               </div>
               <div class="col-md-10 col-sm-12">
-                <button
-                  type="button"
-                  class="btn btn-danger col-md-3 col-sm-12 float-right ml-1 mb-2"
-                  data-dismiss="modal"
-                >
-                  <span class="p-1"><i class="fas fa-download"></i></span>
-                  Download MoM
-                </button>
+                <a href="<?php echo base_url('meetpic/download_rapat').'/'.$ID_RAPAT ?>" target="_blank">
+                  <button
+                    type="button"
+                    class="btn btn-danger col-md-3 col-sm-12 float-right ml-1 mb-2"
+                    data-dismiss="modal"
+                  >
+                    <span class="p-1"><i class="fas fa-download"></i></span>
+                    Download MoM
+                  </button>
+                </a>      
                 <a href="<?php echo base_url('meetpic/daftar_peserta').'/'.$ID_RAPAT?>">
                   <button
                     type="button"
