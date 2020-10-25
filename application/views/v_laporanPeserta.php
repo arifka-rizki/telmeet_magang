@@ -18,7 +18,7 @@
   <div>
     <table style="width:1000px; border-top-style:none;">
       <tr>
-        <td colspan="3"
+        <td colspan="5"
         style="padding:10px;
         font-size:1.1em;
         text-align:center;
@@ -31,7 +31,7 @@
         </td>
       </tr>
       <tr>
-        <td colspan="3"
+        <td colspan="5"
         style="padding:10px;
         text-align:center;
         ">
@@ -41,33 +41,48 @@
         </td>
       </tr>
         <tr>
-          <td style="width:300px">
+          <td style="width:200px">
             <b>
               Nama
             </b>
-          </td>
-          <td style="width:300px">
+          </td>          
+          <td style="width:200px">
             <b>
-              Waktu Presensi
+              Unit
             </b>
           </td>
-          <td style="width:300px">
+          <td style="width:200px">
             <b>
-              Bukti
+              Jabatan
+            </b>
+          </td>
+          <td style="width:200px">
+            <b>
+              Instansi/ Perusahaan
+            </b>
+          </td>
+          <td style="width:200px">
+            <b>
+              Waktu Presensi
             </b>
           </td>
         </tr>
       <?php foreach ($data as $key => $val): ?>
         <tr>
-          <td style="width:300px">            
+          <td style="width:200px">            
               <?php echo $val->NAMA; ?>
+          </td>          
+          <td style="width:200px">
+              <?php echo $val->NAMA_UNIT ?>
           </td>
-          <td style="width:300px">
+          <td style="width:200px">
+              <?php echo $val->JABATAN ?>
+          </td>
+          <td style="width:200px">
+              <?php echo $val->INSTANSI ?>
+          </td>
+          <td style="width:200px">
               <?php echo $val->WAKTU_PRESENSI ?>
-          </td>
-          <td style="width:300px">
-            <!--<img src="<?php echo $val->BUKTI_KEHADIRAN ?>" alt="">-->
-              <?php echo $val->BUKTI_KEHADIRAN ?>
           </td>
         </tr>
       <?php endforeach;?>

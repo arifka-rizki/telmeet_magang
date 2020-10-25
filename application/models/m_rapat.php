@@ -97,15 +97,8 @@ class m_rapat extends CI_Model
     }
 
     //presensi rapat
-    function join_rapat($id,$inv,$bukti)
+    function join_rapat($data)
     {
-        $data['data']=array(
-            'ID_RAPAT' => $id,
-            'NIK' => $inv,
-            'WAKTU_PRESENSI' => date("Y-m-d H:i:s"),
-            'BUKTI_KEHADIRAN' => $bukti,
-        );
-
         $this->db->insert('tb_peserta_rapat', $data['data']);
     }
 
@@ -125,7 +118,7 @@ class m_rapat extends CI_Model
     function get_peserta_rapat($idrapat)
     {
         $this->db->where('tb_peserta_rapat.ID_RAPAT',$idrapat);
-        $this->db->select('tb_users.NAMA, tb_peserta_rapat.WAKTU_PRESENSI, tb_peserta_rapat.BUKTI_KEHADIRAN');
+        $this->db->select('*');
         $this->db->from('tb_users');
         $this->db->join('tb_peserta_rapat', 'tb_peserta_rapat.NIK=tb_users.NIK','inner');
         return $this->db->get()->result();
@@ -180,25 +173,6 @@ class m_rapat extends CI_Model
         $this->db->where($this->id, $id);
         $this->db->set('STATUS','1');
         $this->db->update($this->table);
-    }
-
-    private function _uploadImage()
-    {
-        $config['upload_path']          = './upload/presensi/';
-        $config['allowed_types']        = 'gif|jpg|png';
-        $config['file_name']            = $this->id.'_'.$this->inv;
-        $config['overwrite']			= true;
-        $config['max_size']             = 1024; // 1MB
-        // $config['max_width']            = 1024;
-        // $config['max_height']           = 768;
-
-        $this->load->library('upload', $config);
-
-        if ($this->upload->do_upload('image')) {
-            return $this->upload->data("file_name");
-        }
-        
-        return "default.jpg";
     }
     
     // get total rows
