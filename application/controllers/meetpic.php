@@ -279,7 +279,9 @@ class meetpic extends CI_Controller {
             /*$data['data'] = array(
                 'NAMA' => set_value('NAMA', $peserta->NAMA),
         		'WAKTU_PRESENSI' => set_value('WAKTU_PRESENSI', $peserta->WAKTU_PRESENSI),
-                'BUKTI_KEHADIRAN' => set_value('BUKTI_KEHADIRAN', $peserta->KODE_RAPAT),
+                'BUKTI_KEHADIRAN' => set_value('BUKTI_KEHADIRAN', $peserta->FOTO),
+                'NAMA_UNIT' => set_value('NAMA_UNIT', $peserta->NAMA_UNIT),
+                'JABATAN' => set_value('JABATAN', $peserta->JABATAN),
             );*/
 
             $this->load->view('templates/header');
@@ -337,11 +339,7 @@ class meetpic extends CI_Controller {
         } else {
             $this->session->set_flashdata('message', 'Record Not Found');
             redirect(site_url('meetpic'));
-        }
-        
-
-        
-      
+        }     
     }
-
+    
 }

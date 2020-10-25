@@ -74,6 +74,8 @@
                 </a>
               </div>
               <div class="col-md-10 col-sm-12">
+              <div class="col">
+              <?php if (!$show_button) { ?>
                 <button
                   type="button"
                   class="btn btn-danger col-md-3 col-sm-12 float-right ml-1 b mb-2"
@@ -82,6 +84,7 @@
                   <span class="p-2"><i class="fas fa-download"></i></span>
                   Download MoM
                 </button>
+                <?php } ?>
                 <?php if ($show_button) { ?>                
                   <button
                     type="button"
@@ -119,16 +122,14 @@
                       </button>
                     </div>
                     <div class="modal-body">
-                      <form class="needs-validation" novalidate action="<?php echo site_url('meetinv/presensi_rapat_action');?>" method="post">
+                      <form class="needs-validation" novalidate action="<?php echo site_url('meetinv/presensi_rapat_action');?>" method="post" enctype="multipart/form-data">
                         <div class="mb-4">
-                          <label for="buktiRapat"><b>Masukkan Bukti Rapat</b></label>
+                          <label for="buktiRapat"><b>Upload Bukti Rapat</b></label>
                           <input
                             type="file"
                             class="form-control"
-                            name="BUKTI_KEHADIRAN"
-                            id="buktiRapat"
-                            placeholder=""
-                            value=""
+                            name="PHOTO"
+                            id="PHOTO"
                             accept="image/*"
                             required
                           />

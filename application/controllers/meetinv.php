@@ -137,10 +137,46 @@ class meetinv extends CI_Controller {
 
     public function presensi_rapat_action()
     {
-        $bukti_kehadiran = $this->input->post('BUKTI_KEHADIRAN');
+        //$bukti_kehadiran = $this->input->post('BUKTI_KEHADIRAN');
         $id = $this->input->post('ID_RAPAT');
-        
-        $this->m_rapat->join_rapat($id,$this->session->userdata("nik"),$bukti_kehadiran);
-        redirect(site_url('meetinv'));
+        $nik = $this->session->userdata("nik");
+        $ext = pathinfo($_FILES['PHOTO']['name'],PATHINFO_EXTENSION);
+
+        //$namafoto = date('YmdHis').'.jpg';
+        $namafoto = $id.'_'.$nik.".".$ext;
+        $config = $this->config_image($namafoto,"./upload/presensi/");
+        $this->load->library('upload',$config);
+        $this->upload->initialize($config);
+        $a=$this->upload->do_upload('PHOTO');
+
+        if($a){
+            $bukti = $namafoto;
+            $data['data']=array(
+                'ID_RAPAT' => $id,
+                'NIK' => $nik,
+                'WAKTU_PRESENSI' => date("Y-m-d H:i:s"),
+                'FOTO' => $bukti
+            );
+                    
+            $this->m_rapat->join_rapat($data);
+            redirect(site_url('meetinv'));
+        }
+        else 
+        {
+            echo $this->upload->display_errors(), "\n";
+            echo $ext;
+        }//redirect((site_url('meetinv')));
+    }
+
+    public function config_image($file_name,$path){
+        $config['image_library'] = 'gd2';
+        $config['file_name']=$file_name;
+        $config['upload_path']=$path;
+        $config['allowed_types']='png|jpg|gif|jpeg|PNG|JPG|JPEG';
+        $config['max_size']=50000;
+        $config['max_height']=50000;
+        $config['max_width']=50000;
+        $config['overwrite']=TRUE;
+        return $config;
     }
 }

@@ -26,6 +26,8 @@
                     <tr>
                       <th>No</th>
                       <th>Nama</th>
+                      <th>Unit</th>
+                      <th>Jabatan</th>
                       <th>Waktu Presensi</th>
                       <th>Bukti Kehadiran</th>
                     </tr>
@@ -36,8 +38,10 @@
                       <?php foreach ($data as $key => $val): ?>
                         <td><?php echo $key+1 ?></td>
                         <td><?php echo $val->NAMA; ?></td>
+                        <td><?php echo $val->NAMA_UNIT; ?></td>
+                        <td><?php echo $val->JABATAN; ?></td>
                         <td><?php echo $val->WAKTU_PRESENSI ?></td>
-                        <td><?php echo $val->BUKTI_KEHADIRAN ?></td>
+                        <td><img src="<?php echo base_url('upload/presensi/'.$val->FOTO); ?>" alt="bukti presensi"></td>
                       </tr>
                     <?php endforeach;?>
                   </tbody>
