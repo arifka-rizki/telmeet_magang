@@ -61,7 +61,6 @@
               </div>
             </div>
             <div class="row p-3">
-<<<<<<< HEAD
             <div class="col-md col-sm-12">
               <a href="<?php echo site_url('meetinv')?>">
                   <button
@@ -75,10 +74,8 @@
                 </a>
               </div>
               <div class="col-md-10 col-sm-12">
-=======
               <div class="col">
               <?php if (!$show_button) { ?>
->>>>>>> 1b385b4... upload and view image, change MoM
                 <button
                   type="button"
                   class="btn btn-danger col-md-3 col-sm-12 float-right ml-1 b mb-2"
