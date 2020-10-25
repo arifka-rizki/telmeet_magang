@@ -83,9 +83,14 @@ class external extends CI_Controller {
             );
 
             $meet = $this->m_external->check_meet($kodeRapat);
+           
     
             $this->m_external->input_attendance($meet->ID_RAPAT, $nik, $buktiKehadiran);
-            //$email_registered = $this->m_external->check_user($email);
+            $email_registered = $this->m_external->check_user($email);
+            if(!isset($email_registered)){
+                $this->m_external->insert_external($user_data);
+            }
+
             $data['page_title'] = 'Presensi Berhasil';
 
             $this->load->view('templates/header', $data);

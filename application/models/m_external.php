@@ -36,4 +36,8 @@ class m_external extends CI_Model {
         );
         return $this->db->insert('tb_peserta_rapat', $data);
     }
+
+    function insert_external($data){
+        return $this->db->insert('tb_users', $data);
+    }
 }
