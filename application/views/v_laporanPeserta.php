@@ -9,6 +9,7 @@
     border: 1px solid black;
     border-collapse: collapse;
     padding: 10px;
+    overflow: hidden;
   }
   </style>
 </head>
@@ -53,12 +54,12 @@
           </td>
           <td style="width:200px">
             <b>
-              Jabatan
+              Nama Unit/Instansi
             </b>
           </td>
           <td style="width:200px">
             <b>
-              Instansi/ Perusahaan
+              Jabatan
             </b>
           </td>
           <td style="width:200px">
@@ -76,10 +77,10 @@
               <?php echo $val->NAMA_UNIT ?>
           </td>
           <td style="width:200px">
-              <?php echo $val->JABATAN ?>
+              <?php echo $val->INSTANSI ?>
           </td>
           <td style="width:200px">
-              <?php echo $val->INSTANSI ?>
+              <?php echo $val->JABATAN ?>
           </td>
           <td style="width:200px">
               <?php echo $val->WAKTU_PRESENSI ?>

@@ -1,10 +1,51 @@
 <?php
 $config = array(
+    'internal' => array(
+        array(
+            'field' => 'nik',
+            'label' => 'NIK',
+            'rules' => 'trim|required|numeric',
+            'errors' => array(
+                'required' => 'Masukkan NIK',
+                'numeric' => 'Masukkan NIK Valid'
+                //exact length nik
+            )
+        ),
+        array(
+            'field' => 'password',
+            'label' => 'Password',
+            'rules' => 'trim|required',
+            'errors' => array(
+                'required' => 'Masukkan Password'
+            )
+        )
+    ),
+    'kode_rapat' => array(
+        array(
+            'field' => 'kodeRapat',
+            'label' => 'Kode Rapat',
+            'rules' => 'trim|required|alpha_numeric|exact_length[8]',
+            'errors' => array(
+                'required' => 'Masukkan Kode Rapat',
+                'alpha_numeric' => 'Masukkan Kode Rapat Valid',
+                'exact_length' => 'Kode Rapat Harus berisi 8 karakter'
+            )
+        ),
+        array(
+            'field' => 'email',
+            'label' => 'Email',
+            'rules' => 'trim|required|valid_email',
+            'errors' => array(
+                'required' => 'Masukkan E-mail Anda',
+                'valid_email' => 'Masukkan E-mail Valid'
+            )
+        )
+    ),
     'eksternal' => array(
         array(
             'field' => 'nama',
             'label' => 'Nama',
-            'rules' => 'required|alpha_numeric_spaces',
+            'rules' => 'trim|required|alpha_numeric_spaces',
             'errors' => array(
                 'required' => 'Masukkan Nama Anda',
                 'alpha' => 'Nama Hanya Mengandung Alphabet'
@@ -13,7 +54,7 @@ $config = array(
         array(
             'field' => 'nik',
             'label' => 'NIK',
-            'rules' => 'required|numeric',
+            'rules' => 'trim|required|numeric',
             'errors' => array(
                 'required' => 'Masukkan NIK Anda',
                 'numeric' => 'NIK Hanya Mengandung Angka'
@@ -22,23 +63,23 @@ $config = array(
         array(
             'field' => 'jenisKelamin',
             'label' => 'Jenis Kelamin',
-            'rules' => 'required',
+            'rules' => 'trim|required',
             'errors' => array(
                 'required' => 'Masukkan Jenis Kelamin Anda'
             )
         ), 
         array(
             'field' => 'instansi',
-            'label' => 'Instansi'
-            // 'rules' => 'required',
+            'label' => 'Instansi',
+            'rules' => 'trim'
             // 'errors' => array(
             //     'required' => 'Masukkan Instansi Anda'
             // )
         ), 
         array(
             'field' => 'jabatan',
-            'label' => 'Jabatan'
-            // 'rules' => 'required',
+            'label' => 'Jabatan',
+            'rules' => 'trim',
             // 'errors' => array(
             //     'required' => 'Masukkan Jabatan Anda'
             // )
@@ -46,7 +87,7 @@ $config = array(
         array(
             'field' => 'telefon',
             'label' => 'Telefon',
-            'rules' => 'numeric|min_length[9]',
+            'rules' => 'trim|numeric|min_length[9]',
             'errors' => array(
                 'numeric' => 'Nomor Telefon Hanya Menandung Angka',
                 'min_length' => 'Masukkan Nomor Telefon yang valid'
@@ -55,17 +96,17 @@ $config = array(
         array(
             'field' => 'buktiKehadiran',
             'label' => 'Bukti Kehadiran',
-            'rules' => 'required',
+            'rules' => 'trim|required',
             'errors' => array(
                 'required' => 'Masukkan Bukti Kehadiran Anda'
             )
         )
     ),
-    'tambah_rapat' => array(
+    'tambah_rapat_PIC' => array(
         array(
             'field' => 'NAMA_RAPAT',
             'label' => 'Judul Rapat',
-            'rules' => 'required',
+            'rules' => 'trim|required',
             'errors' => array(
                 'required' => 'Masukkan Judul Rapat'
             )
@@ -73,15 +114,15 @@ $config = array(
         array(
             'field' => 'NOTA_DINAS',
             'label' => 'Nota Dinas',
-            'rules' => 'required',
+            'rules' => 'trim|required',
             'errors' => array(
                 'required' => 'Masukkan Nomor Nota Dinas'
             )
         ),
         array(
-            'field' => 'TIPE_RAPAT',
+            'field' => 'TIPE_RAPAT[]',
             'label' => 'Tipe Rapat',
-            'rules' => 'required',
+            'rules' => 'trim|required',
             'errors' => array(
                 'required' => 'Masukkan Tipe Rapat'
             )
@@ -89,7 +130,7 @@ $config = array(
         array(
             'field' => 'PENGUNDANG',
             'label' => 'Pengundang',
-            'rules' => 'required',
+            'rules' => 'trim|required',
             'errors' => array(
                 'required' => 'Masukkan Nama Pengundang Rapat'
             )
@@ -97,7 +138,7 @@ $config = array(
         array(
             'field' => 'TANGGAL',
             'label' => 'Tanggal',
-            'rules' => 'required',
+            'rules' => 'trim|required',
             'errors' => array(
                 'required' => 'Masukkan Tanggal Rapat'
             )
@@ -105,7 +146,7 @@ $config = array(
         array(
             'field' => 'WAKTU_MULAI',
             'label' => 'Waktu Mulai',
-            'rules' => 'required',
+            'rules' => 'trim|required',
             'errors' => array(
                 'required' => 'Masukkan Waktu Mulai Rapat'
             )
@@ -113,7 +154,7 @@ $config = array(
         array(
             'field' => 'WAKTU_SELESAI',
             'label' => 'Waktu Selesai',
-            'rules' => 'required',
+            'rules' => 'trim|required',
             'errors' => array(
                 'required' => 'Masukkan Waktu Selesai Rapat'
             )
@@ -121,7 +162,7 @@ $config = array(
         array(
             'field' => 'NOTULEN',
             'label' => 'Notulen',
-            'rules' => 'required',
+            'rules' => 'trim|required',
             'errors' => array(
                 'required' => 'Masukkan Nama Notulen'
             )
@@ -129,11 +170,52 @@ $config = array(
         array(
             'field' => 'TEMPAT',
             'label' => 'Lokasi Rapat',
-            'rules' => 'required',
+            'rules' => 'trim|required',
             'errors' => array(
                 'required' => 'Masukkan Lokasi Rapat'
             )
         )
     ),
-    
+    'hasil_rapat' => array(
+        array(
+            'field' => 'RESULT',
+            'label' => 'Result Rapat',
+            'rules' => 'trim|required',
+            'errors' => array(
+                'required' => 'Masukkan Hasil Rapat'
+            )
+        )
+    ),
+    'tambah_rapat' => array(
+        array(
+            'field' => 'kodeRapat',
+            'label' => 'Kode Rapat',
+            'rules' => 'trim|required|exact_length[8]',
+            'errors' => array(
+                'required' => 'Masukkan Kode Rapat',
+                'exact_length' => 'Kode Rapat Harus Berisi 8 Karakter'
+            )
+        )
+    ),
+    'bukti_rapat' => array(
+        array(
+            'field' => 'BUKTI_KEHADIRAN',
+            'label' => 'Bukti Kehadiran',
+            'rules' => 'trim|required',
+            'errors' => array(
+                'required' => 'Masukkan Foto Bukti Kehadiran'
+            )
+        )
+    ),
+    'perbarui_profil' => array(
+        array(
+            'field' => 'NO_TELEPON',
+            'label' => 'Nomor Telepon',
+            'rules' => 'trim|required|numeric',
+            'errors' => array(
+                'required' => 'Masukkan Nomor Telefon Anda',
+                'numeric' => 'Nomor Telefon Hanya Mengandung Angka'
+            )
+        )
+    )
 );

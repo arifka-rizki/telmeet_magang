@@ -12,14 +12,14 @@ class meetpic extends CI_Controller {
         }
 
         $this->load->model('m_rapat');
-        $this->load->library('form_validation');
         $this->load->library('upload');
-    	//$this->load->library('datatables');
     }
 
     public function index(){
-        $data['data']=$this->m_rapat->get_by_pic($this->session->userdata("nik"));
-        $this->load->view('templates/header');
+        $data['data'] = $this->m_rapat->get_by_pic($this->session->userdata("nik"));
+        $data['page_title'] = 'Dashboard PIC';
+
+        $this->load->view('templates/header', $data);
         $this->load->view('templates/navbar');
         $this->load->view('v_dashboardpic',$data);
         $this->load->view('templates/copyright');
@@ -29,25 +29,24 @@ class meetpic extends CI_Controller {
     public function add_meet(){
 
         $data = array(
-            'button' => 'Tambah Rapat',
+            'page_title' => 'Tambah Rapat',
             'action' => site_url('meetpic/add_meet_action'),
             'ID_RAPAT' => set_value('ID_RAPAT'),
-            'NIK_PIC' => set_value('NIK_PIC'),
-    	    'KODE_RAPAT' => set_value('KODE_RAPAT'),
-    	    'NAMA_RAPAT' => set_value('NAMA_RAPAT'),
-    	    'TANGGAL' => set_value('TANGGAL'),
-    	    'WAKTU_MULAI' => set_value('WAKTU_MULAI'),
-    	    'WAKTU_SELESAI' => set_value('WAKTU_SELESAI'),
-    	    'TEMPAT' => set_value('TEMPAT'),
-            'TIPE_RAPAT' => set_value('TIPE_RAPAT'),
-            'NOTULEN' => set_value('NOTULEN'),
-            'STATUS' => set_value('STATUS'),
-            'PENANDATANGAN' => set_value('PENANDATANGAN'),
-    	    'PENGUNDANG' => set_value('PENGUNDANG'),
-	        'NOTA_DINAS' => set_value('NOTA_DINAS'),
+            // 'NIK_PIC' => set_value('NIK_PIC'),
+    	    // 'KODE_RAPAT' => set_value('KODE_RAPAT'),
+    	    // 'TANGGAL' => set_value('TANGGAL'),
+    	    // 'WAKTU_MULAI' => set_value('WAKTU_MULAI'),
+    	    // 'WAKTU_SELESAI' => set_value('WAKTU_SELESAI'),
+    	    // 'TEMPAT' => set_value('TEMPAT'),
+            // 'TIPE_RAPAT' => set_value('TIPE_RAPAT'),
+            // 'NOTULEN' => set_value('NOTULEN'),
+            // 'STATUS' => set_value('STATUS'),
+            // 'PENANDATANGAN' => set_value('PENANDATANGAN'),
+    	    // 'PENGUNDANG' => set_value('PENGUNDANG'),
+	        // 'NOTA_DINAS' => set_value('NOTA_DINAS'),
         );
         
-        $this->load->view('templates/header');
+        $this->load->view('templates/header', $data);
         $this->load->view('templates/navbar');
         $this->load->view('v_addmeet', $data);
         $this->load->view('templates/copyright');
@@ -56,26 +55,42 @@ class meetpic extends CI_Controller {
     
     public function add_meet_action() 
     {
+        if($this->form_validation->run('tambah_rapat_PIC') == false)
+        {
+            $data = array(
+                'page_title' => 'Tambah Rapat',
+                'button' => 'Tambah Rapat',
+                'action' => site_url('meetpic/add_meet_action'),    
+                'ID_RAPAT' => set_value('ID_RAPAT'),
+                'TIPE_RAPAT' => set_value('TIPE_RAPAT'),
+            );
+
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/navbar');
+            $this->load->view('v_addmeet', $data);
+            $this->load->view('templates/copyright');
+            $this->load->view('templates/footer');
+        } else{
             $data["data"] = array(
                 'NIK_PIC' => $this->session->userdata("nik"),
-        		'KODE_RAPAT' => $this->m_rapat->generate_code(),
-        		'NAMA_RAPAT' => $this->input->post('NAMA_RAPAT',TRUE),
-        		'TANGGAL' => $this->input->post('TANGGAL',TRUE),
-        		'WAKTU_MULAI' => $this->input->post('WAKTU_MULAI',TRUE),
-        		'WAKTU_SELESAI' => $this->input->post('WAKTU_SELESAI',TRUE),
-        		'TEMPAT' => $this->input->post('TEMPAT',TRUE),
-                'TIPE_RAPAT' => $this->input->post('TIPE_RAPAT',TRUE),
+                'KODE_RAPAT' => $this->m_rapat->generate_code(),
+                'NAMA_RAPAT' => $this->input->post('NAMA_RAPAT',TRUE),
+                'TANGGAL' => $this->input->post('TANGGAL',TRUE),
+                'WAKTU_MULAI' => $this->input->post('WAKTU_MULAI',TRUE),
+                'WAKTU_SELESAI' => $this->input->post('WAKTU_SELESAI',TRUE),
+                'TEMPAT' => $this->input->post('TEMPAT',TRUE),
+                'TIPE_RAPAT' => implode(", ",$this->input->post('TIPE_RAPAT',TRUE)),
                 'NOTULEN' => $this->input->post('NOTULEN',TRUE),
                 'STATUS' => "0",
                 'PENANDATANGAN' => $this->input->post('PENANDATANGAN',TRUE),
-        		'PENGUNDANG' => $this->input->post('PENGUNDANG',TRUE),
-        		'NOTA_DINAS' => $this->input->post('NOTA_DINAS',TRUE),
-    	    );
-            
+                'PENGUNDANG' => $this->input->post('PENGUNDANG',TRUE),
+                'NOTA_DINAS' => $this->input->post('NOTA_DINAS',TRUE),
+            );
+
             $this->m_rapat->insert($data);
-            $this->session->set_flashdata('message', 'Create Record Success');
+            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert"> Berhasil Menambahkan Rapat Baru! Kode Rapat: <b>'. $data["data"]["KODE_RAPAT"] .'</b></div>');
             redirect(site_url('meetpic'));
-        //}
+        }
     }
 
     public function add_hasilmeet($id){
@@ -83,42 +98,61 @@ class meetpic extends CI_Controller {
 
         if ($row) {
             $data = array(
+                'page_title' => 'Tambah Hasil Rapat '. $row->NAMA_RAPAT,
                 'button' => 'Edit Rapat',
                 'action' => site_url('meetpic/add_hasilmeet_action'),
-                
+                'NAMA_RAPAT' => $row->NAMA_RAPAT,
                 'ID_RAPAT' => $row->ID_RAPAT,
         		
                 'BACKGROUND' => $row->BACKGROUND,
                 'ACTION_PLAN' => $row->ACTION_PLAN,
                 'RESULT' => $row->RESULT,
             );
-            
-            $this->load->view('templates/header');
+            $this->load->view('templates/header', $data);
             $this->load->view('templates/navbar');
             $this->load->view('v_addHasilRapat', $data);
             $this->load->view('templates/copyright');
             $this->load->view('templates/footer');
-        } 
-        
+        }  
         else {
-            $this->session->set_flashdata('message', 'Record Not Found');
+            $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Rapat Tidak Ditemukan</div>');
             redirect(site_url('meetpic'));
         }
     }
     
     public function add_hasilmeet_action() 
     {
-        $data['update'] = array(
+        if($this->form_validation->run('hasil_rapat') == false){
+            $row = $this->m_rapat->get_by_id($this->input->post('ID_RAPAT', TRUE));
+            $data = array(
+                'page_title' => 'Tambah Hasil Rapat '. $row->NAMA_RAPAT,
+                'button' => 'Edit Rapat',
+                'action' => site_url('meetpic/add_hasilmeet_action'),
+                'NAMA_RAPAT' => $row->NAMA_RAPAT,
+                'ID_RAPAT' => $row->ID_RAPAT,
+        		
+                'BACKGROUND' => $row->BACKGROUND,
+                'ACTION_PLAN' => $row->ACTION_PLAN,
+                'RESULT' => $row->RESULT,
+            );
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/navbar');
+            $this->load->view('v_addHasilRapat', $data);
+            $this->load->view('templates/copyright');
+            $this->load->view('templates/footer');
+        } 
+        else{
+            $data['update'] = array(
        
-            'BACKGROUND' => $this->input->post('BACKGROUND',TRUE),
-            'ACTION_PLAN' => $this->input->post('ACTION_PLAN',TRUE),
-            'RESULT' => $this->input->post('RESULT',TRUE),
-        );
-
-        $this->m_rapat->update($this->input->post('ID_RAPAT', TRUE), $data);
-        $this->session->set_flashdata('message', 'Update Record Success');
-        redirect(site_url('meetpic'));
-        
+                'BACKGROUND' => $this->input->post('BACKGROUND',TRUE),
+                'ACTION_PLAN' => $this->input->post('ACTION_PLAN',TRUE),
+                'RESULT' => $this->input->post('RESULT',TRUE),
+            );
+    
+            $this->m_rapat->update($this->input->post('ID_RAPAT', TRUE), $data);
+            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert"> Berhasil Menambahkan Hasil Rapat</div>');
+            redirect(site_url('meetpic'));
+        }
     }
     
     public function update($id) 
@@ -127,7 +161,7 @@ class meetpic extends CI_Controller {
 
         if ($row) {
             $data = array(
-                'button' => 'Edit Rapat',
+                'page_title' => 'Edit Rapat',
                 'action' => site_url('meetpic/update_action'),
         		'ID_RAPAT' => $row->ID_RAPAT,
         		'NIK_PIC' => $row->NIK_PIC,
@@ -144,7 +178,7 @@ class meetpic extends CI_Controller {
                 'NOTA_DINAS' => $row->NOTA_DINAS,
             );
             
-            $this->load->view('templates/header');
+            $this->load->view('templates/header', $data);
             $this->load->view('templates/navbar');
             $this->load->view('v_addmeet', $data);
             $this->load->view('templates/copyright');
@@ -152,18 +186,17 @@ class meetpic extends CI_Controller {
         } 
         
         else {
-            $this->session->set_flashdata('message', 'Record Not Found');
+            $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert"> Rapat Tidak Ditemukan</div>');
             redirect(site_url('meetpic'));
         }
     }
     
     public function update_action() 
     {
-        //$this->_rules();
-
-        //if ($this->form_validation->run() == FALSE) {
-        //    $this->update($this->input->post('ID_RAPAT', TRUE));
-        //} else {
+        $id = $this->input->post('ID_RAPAT', TRUE);
+        if ($this->form_validation->run('tambah_rapat_PIC') == FALSE) {
+            $this->update($id);
+        } else {
             $data['update'] = array(
         		'NIK_PIC' => $this->session->userdata("nik"),
         		'NAMA_RAPAT' => $this->input->post('NAMA_RAPAT',TRUE),
@@ -171,7 +204,7 @@ class meetpic extends CI_Controller {
         		'WAKTU_MULAI' => $this->input->post('WAKTU_MULAI',TRUE),
         		'WAKTU_SELESAI' => $this->input->post('WAKTU_SELESAI',TRUE),
         		'TEMPAT' => $this->input->post('TEMPAT',TRUE),
-                'TIPE_RAPAT' => $this->input->post('TIPE_RAPAT',TRUE),
+                'TIPE_RAPAT' => implode(", ",$this->input->post('TIPE_RAPAT',TRUE)),
                 'NOTULEN' => $this->input->post('NOTULEN',TRUE),
                 'STATUS' => "0",
                 'PENANDATANGAN' => $this->input->post('PENANDATANGAN',TRUE),
@@ -179,10 +212,10 @@ class meetpic extends CI_Controller {
         		'NOTA_DINAS' => $this->input->post('NOTA_DINAS',TRUE),
             );
 
-            $this->m_rapat->update($this->input->post('ID_RAPAT', TRUE), $data);
-            $this->session->set_flashdata('message', 'Update Record Success');
+            $this->m_rapat->update($id, $data);
+            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Detail Rapat Berhasil Diperbarui</div>');
             redirect(site_url('meetpic'));
-        //}
+        }
     }
     
     public function delete($id) 
@@ -191,40 +224,20 @@ class meetpic extends CI_Controller {
 
         if ($row) {
             $this->m_rapat->delete($id);
-            $this->session->set_flashdata('message', 'Delete Record Success');
+            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Berhasil Menghapus Rapat</div>');
             redirect(site_url('meetpic'));
         } else {
-            $this->session->set_flashdata('message', 'Record Not Found');
+            $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Gagal Menghapus Rapat</div>');
             redirect(site_url('meetpic'));
         }
     }
 
-    public function _rules() 
-    {
-        $this->form_validation->set_rules('NAMA_RAPAT', 'nama rapat', 'trim|required');
-        $this->form_validation->set_rules('TANGGAL', 'tanggal', 'trim|required');
-        $this->form_validation->set_rules('WAKTU_MULAI', 'waktu mulai', 'trim|required');
-        $this->form_validation->set_rules('WAKTU_SELESAI', 'waktu selesai', 'trim|required');
-        $this->form_validation->set_rules('TEMPAT', 'tempat', 'trim|required');
-        $this->form_validation->set_rules('TIPE_RAPAT', 'tipe rapat', 'trim|required');
-        $this->form_validation->set_rules('PENGUNDANG', 'pengundang', 'trim|required');
-        $this->form_validation->set_rules('NOTA_DINAS', 'nota dinas', 'trim');
-        $this->form_validation->set_rules('STATUS', 'status', 'trim');
-        $this->form_validation->set_rules('PENANDATANGAN', 'penandatangan', 'trim|required');
-        $this->form_validation->set_rules('NOTULEN', 'notulen', 'trim|required');
-        $this->form_validation->set_rules('PESERTA', 'peserta', 'trim');
-
-        $this->form_validation->set_rules('KODE_RAPAT', 'KODE RAPAT', 'trim');
-        $this->form_validation->set_rules('ID_RAPAT', 'ID_RAPAT', 'trim');
-        $this->form_validation->set_rules('NIK_PIC', 'NIK_PIC', 'trim');
-        $this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
-    }
-    
     public function detail($id){
         $row = $this->m_rapat->get_by_id($id);
         
         if ($row) {
             $data = array(
+                'page_title' => 'Detail Rapat ' . $row->NAMA_RAPAT,
                 'ID_RAPAT' => set_value('ID_RAPAT', $row->ID_RAPAT),
         		'NIK_PIC' => set_value('NIK_PIC', $row->NIK_PIC),
                 'KODE_RAPAT' => set_value('KODE_RAPAT', $row->KODE_RAPAT),
@@ -240,13 +253,13 @@ class meetpic extends CI_Controller {
                 'PENGUNDANG' => set_value('PENGUNDANG', $row->PENGUNDANG),
                 'NOTA_DINAS' => set_value('NOTA_DINAS', $row->NOTA_DINAS),
 	        );
-            $this->load->view('templates/header');
+            $this->load->view('templates/header', $data);
             $this->load->view('templates/navbar');
             $this->load->view('v_detailRapatPIC',$data);
             $this->load->view('templates/copyright');
             $this->load->view('templates/footer');
         } else {
-            $this->session->set_flashdata('message', 'Record Not Found');
+            $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Rapat Tidak Ditemukan</div>');
             redirect(site_url('meetpic'));
         }
         
@@ -256,8 +269,10 @@ class meetpic extends CI_Controller {
     {
         $keyword = $this->input->post('keyword',TRUE);
         $data['data'] = $this->m_rapat->search_pic($keyword,$this->session->userdata("nik"));
+        $data['page_title'] = 'Dashboard PIC';
+        $data['keyword'] = $keyword;
 
-        $this->load->view('templates/header');
+        $this->load->view('templates/header', $data);
         $this->load->view('templates/navbar');
         $this->load->view('v_dashboardpic',$data);
         $this->load->view('templates/copyright');
@@ -270,7 +285,8 @@ class meetpic extends CI_Controller {
         $peserta = $this->m_rapat->get_peserta_rapat($id);
         
         if ($row) {
-            $data = array(                                    
+            $data = array(   
+                'page_title' => 'Daftar Peserta Rapat ' . $row->NAMA_RAPAT,                                 
                 'NAMA_RAPAT'=> $row->NAMA_RAPAT,
                 'TANGGAL' => $row->TANGGAL,
                 'WAKTU_MULAI' => $row->WAKTU_MULAI,
@@ -284,7 +300,7 @@ class meetpic extends CI_Controller {
                 'JABATAN' => set_value('JABATAN', $peserta->JABATAN),
             );*/
 
-            $this->load->view('templates/header');
+            $this->load->view('templates/header', $data);
             $this->load->view('templates/navbar');
             $this->load->view('v_daftarPeserta', $data);
             $this->load->view('templates/copyright');
@@ -337,7 +353,7 @@ class meetpic extends CI_Controller {
             $mpdf->WriteHTML($sola);
             $mpdf->Output('','D');
         } else {
-            $this->session->set_flashdata('message', 'Record Not Found');
+            $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Gagal Mengunduh MoM Rapat</div>');
             redirect(site_url('meetpic'));
         }     
     }

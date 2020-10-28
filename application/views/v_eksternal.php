@@ -17,7 +17,7 @@
             <div class="row">
               <div class="col-md-6 px-3">
                 <div class="mb-3">
-                  <form class="needs-validation" novalidate method="POST" action="<?= base_url('external/meet_check'); ?>">
+                  <form class="needs-validation" novalidate method="POST" action="<?= base_url('eksternal/meet_check'); ?>">
                     <div class="mb-4">
                       <label for="kodeRapat"><b>Kode Rapat</b></label>
                       <input
@@ -112,7 +112,7 @@
             <div class="row px-3 py-3">
               <h4><b>Identitas Peserta</b></h4>
             </div>
-            <form class="needs-validation" novalidate method="POST" id="identitas" action="<?php echo base_url('external/presensi'); ?>">
+            <form class="needs-validation" novalidate method="POST" id="identitas" action="<?php echo base_url('eksternal/presensi'); ?>">
               <div class="row">
                 <div class="col-md-6 px-3">
                   <div id="hiraukan" style="display: none;">
@@ -279,7 +279,25 @@
                     <?php echo form_error('telefon', '<p class = "alert alert-danger" role="alert">', '</p>'); ?>
                   </div>
 
-                  <div class="mb-3">
+                  <div class="input-group mt-3">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text">Unggah</span>
+                    </div>
+                    <div class="custom-file">
+                      <input 
+                        type="file" 
+                        class="custom-file-input" 
+                        id="buktiKehadiran"
+                        value=""
+                        required
+                        accept="image/*"
+                        name="buktiKehadiran"
+                      >
+                      <label class="custom-file-label" for="buktiKehadiran">Bukti Kehadiran</label>
+                    </div>
+                  </div>
+                  <?php echo form_error('buktiKehadiran', '<p class = "alert alert-danger" role="alert">', '</p>'); ?>
+                  <!-- <div class="mb-3" id="customFile">
                     <label for="buktiKehadiran"><b>Bukti Kehadiran*</b></label>
                     <input
                       type="file"
@@ -289,10 +307,10 @@
                       required
                       name="buktiKehadiran"
                       accept="image/*"
-                      value="<?= set_value('buktiKehadiran'); ?>"
+                      value=""
                     />
-                    <?php echo form_error('buktiKehadiran', '<p class = "alert alert-danger" role="alert">', '</p>'); ?>
-                  </div>
+                    
+                  </div> -->
                 </div>
               </div>
 

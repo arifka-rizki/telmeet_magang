@@ -1,15 +1,20 @@
 <main>
       <div class="container mt-5">
         <div class="row p-3 shadow-sm rounded bg-white my-3">
-          <h3>
-            <b>Beranda </b>
-          </h3>
-        </div>
-        <div class="row p-3 shadow-sm rounded bg-white my-3">
-          <a href="#" class="btn btn-danger">Penanggung Jawab</a>
-          <a href="<?php echo base_url('meetinv'); ?>" class="btn btn-outline-danger"
-            >Undangan</a
-          >
+          <div class="col">
+            <div>
+              <h3>
+                <b>Beranda </b>
+              </h3>
+            </div>
+            <div>
+            <hr>
+            <a href="#" class="btn btn-danger">Penanggung Jawab</a>
+            <a href="<?php echo base_url('meetinv'); ?>" class="btn btn-outline-danger"
+              >Undangan</a
+            >
+            </div>
+          </div>
         </div>
 
         <div class="row justify-content-center pt-1 shadow-sm rounded bg-white">
@@ -21,6 +26,7 @@
                     class="form-control col-sm-8"
                     type="search"
                     name="keyword"
+                    value="<?php if(isset($keyword)) echo $keyword;?>"
                     placeholder="Cari Agenda Rapat"
                     aria-label="Search"
                   />
@@ -43,9 +49,9 @@
                 </a>
               </div>
             </div>
-
             <div class="row p-3">
               <div class="table-responsive">
+                <?= $this->session->flashdata('message'); ?>
                 <table class="table table-striped">
                   <thead>
                     <tr>

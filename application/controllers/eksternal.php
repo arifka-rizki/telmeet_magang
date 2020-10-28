@@ -1,44 +1,42 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class external extends CI_Controller {
+class eksternal extends CI_Controller {
 
     public function __construct()
     {
         parent::__construct();
-        $this->load->model('m_external');
+        $this->load->model('m_eksternal');
     }
 
     public function index(){
         $data['page_title'] = 'Presensi Eksternal';
 
         $this->load->view('templates/header', $data);
-        $this->load->view('v_external');
+        $this->load->view('v_eksternal');
+        $this->load->view('templates/copyright');
         $this->load->view('templates/footer');
     }
 
     public function meet_check(){
-        $this->form_validation->set_rules('email', 'Email', 'required|valid_email',
-            array('required'=>'Masukkan E-mail Anda', 'valid_email'=>'Masukkan E-mail Yang Valid'));
-        $this->form_validation->set_rules('kodeRapat', 'Kode Rapat', 'required|alpha_numeric',
-            array('required'=>'Masukkan Kode Rapat', 'alpha_numeric'=>'Masukkan Kode Rapat Yang Valid'));
-
-        if($this->form_validation->run() == false){
+        if($this->form_validation->run('kode_rapat') == false){
             $data['page_title'] = 'Presensi Eksternal';
 
             $this->load->view('templates/header', $data);
-            $this->load->view('v_external');
+            $this->load->view('v_eksternal');
+            $this->load->view('templates/copyright');
             $this->load->view('templates/footer');
         } else{
             $kodeRapat = $this->input->post('kodeRapat');
             $email = $this->input->post('email');
 
             $data['page_title'] = 'Presensi Eksternal';
-            $data['meet'] = $this->m_external->check_meet($kodeRapat);
-            $data['user'] = $this->m_external->check_user($email);
+            $data['meet'] = $this->m_eksternal->check_meet($kodeRapat);
+            $data['user'] = $this->m_eksternal->check_user($email);
 
             $this->load->view('templates/header', $data);
-            $this->load->view('v_external', $data);
+            $this->load->view('v_eksternal', $data);
+            $this->load->view('templates/copyright');
             $this->load->view('templates/footer');
         }
     }
@@ -50,11 +48,12 @@ class external extends CI_Controller {
             $email = $this->input->post('email');
 
             $data['page_title'] = 'Presensi Eksternal';
-            $data['meet'] = $this->m_external->check_meet($kodeRapat);
-            $data['user'] = $this->m_external->check_user($email);
+            $data['meet'] = $this->m_eksternal->check_meet($kodeRapat);
+            $data['user'] = $this->m_eksternal->check_user($email);
             
             $this->load->view('templates/header', $data);
-            $this->load->view('v_external', $data);
+            $this->load->view('v_eksternal', $data);
+            $this->load->view('templates/copyright');
             $this->load->view('templates/footer');
         } else{
             $nama = $this->input->post('nama');
@@ -75,19 +74,24 @@ class external extends CI_Controller {
                 'INSTANSI' => $instansi,
                 'JABATAN' => $jabatan,
                 'NO_TELEPON' => $telefon,
-                'ROLE' => 1
+                'ROLE' => 1 //Role 1 peserta eksternal
             );
 
-            $meet = $this->m_external->check_meet($kodeRapat);
+            $meet = $this->m_eksternal->check_meet($kodeRapat);
+           
     
-            $this->m_external->input_attendance($meet->ID_RAPAT, $nik, $buktiKehadiran);
-            $email_registered = $this->m_external->check_user($email);
+            $this->m_eksternal->input_attendance($meet->ID_RAPAT, $nik, $buktiKehadiran);
+            $email_registered = $this->m_eksternal->check_user($email);
             if(!isset($email_registered)){
-                $this->m_external->add_user($user_data);
-                echo 'berhasil nambah user';   
-            } else{
-                echo 'tidak nambah user';
+                $this->m_eksternal->insert_external($user_data);
             }
+
+            $data['page_title'] = 'Presensi Berhasil';
+
+            $this->load->view('templates/header', $data);
+            $this->load->view('v_konfirmEksternal', $data);
+            $this->load->view('templates/copyright');
+            $this->load->view('templates/footer');
         }
     }
 }

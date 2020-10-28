@@ -76,14 +76,16 @@
               <div class="col-md-10 col-sm-12">
               <div class="col">
               <?php if (!$show_button) { ?>
-                <button
-                  type="button"
-                  class="btn btn-danger col-md-3 col-sm-12 float-right ml-1 b mb-2"
-                  data-dismiss="modal"
-                >
-                  <span class="p-2"><i class="fas fa-download"></i></span>
-                  Download MoM
-                </button>
+                <a href="<?php echo base_url('meetpic/download_rapat').'/'.$ID_RAPAT ?>" target="_blank">
+                  <button
+                    type="button"
+                    class="btn btn-danger col-md-3 col-sm-12 float-right ml-1 b mb-2"
+                    data-dismiss="modal"
+                  >
+                    <span class="p-2"><i class="fas fa-download"></i></span>
+                    Download MoM
+                  </button>
+                </a>
                 <?php } ?>
                 <?php if ($show_button) { ?>                
                   <button
@@ -110,7 +112,7 @@
                   <div class="modal-content">
                     <div class="modal-header">
                       <h5 class="modal-title" id="exampleModalLabel">
-                        <b>Bukti Rapat</b>
+                        <b>Bukti Kehadiran Rapat</b>
                       </h5>
                       <button
                         type="button"
@@ -124,15 +126,21 @@
                     <div class="modal-body">
                       <form class="needs-validation" novalidate action="<?php echo site_url('meetinv/presensi_rapat_action');?>" method="post" enctype="multipart/form-data">
                         <div class="mb-4">
-                          <label for="buktiRapat"><b>Upload Bukti Rapat</b></label>
-                          <input
-                            type="file"
-                            class="form-control"
-                            name="PHOTO"
-                            id="PHOTO"
-                            accept="image/*"
-                            required
-                          />
+                          <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                              <span class="input-group-text">Unggah</span>
+                            </div>
+                            <div class="custom-file">
+                              <input 
+                                type="file" 
+                                class="custom-file-input" 
+                                id="PHOTO" 
+                                accept="image/*" 
+                                required 
+                                name="PHOTO">
+                              <label class="custom-file-label" for="PHOTO">Bukti Rapat</label>
+                            </div>
+                          </div>
                         </div>
 
                         <input type="hidden" name="ID_RAPAT" value="<?php echo $ID_RAPAT; ?>" /> 

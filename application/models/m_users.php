@@ -1,10 +1,5 @@
 <?php  
 
-
-/**
-* 
-*/
-
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
@@ -29,17 +24,16 @@ class m_users extends CI_Model
 
 	}
 
-	function get_by_id($id){
+	function get_by_nik($nik){
 
-		#Get data user by id
-		$this->db->where($this->primary,$id);
+		#Get data user by nik
+		$this->db->where($this->primary,$nik);
 		$data=$this->db->get($this->table_name);
 
 		return $data->row();
 	}
 
-
-	function get_by_nik_email($nik,$email){		
+	function get_by_nik_email($nik,$email = null){		
 		#Get data by nik or email
 		$this->db->where('NIK',$nik);
 		$this->db->or_where('EMAIL',$email);
@@ -53,24 +47,24 @@ class m_users extends CI_Model
 
 		#Insert data to table tb_users
 		$insert=$this->db->insert($this->table_name,$data);
-		var_dump($insert);die();
+		var_dump($insert); die();
 		return $insert;
 	}
 
-	function delete($id){
-		#Delete data user by id
-		$this->db->where($this->primary,$id);
+	function delete($nik){
+		#Delete data user by nik
+		$this->db->where($this->primary,$nik);
 		$delete=$this->db->delete($this->table_name);
 
 		return $delete;
 	}
 
-	function update($id,$data){
-		#Update data user by id
-		$this->db->where($this->primary,$id);
+	function update($nik,$data){
+		#Update data user by nik
+		$this->db->where($this->primary,$nik);
 		$update=$this->db->update($this->table_name,$data);
 		if ($update) {
-			$update=$this->get_by_id($id);
+			$update=$this->get_by_nik($nik);
 		}
 
 		return $update;

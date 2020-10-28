@@ -9,6 +9,7 @@
     border: 0px solid black;
     border-collapse: collapse;
     padding: 10px;
+    overflow: hidden;
   }
   </style>
 </head>
@@ -28,8 +29,12 @@
           </b>
         </td>
         <tr>
-          <td style="height:750px; vertical-align: top;">
-            <?php echo $BACKGROUND ?>
+          <td style="height:<?php if($ACTION_PLAN != "")
+          {echo "auto";}
+          else {echo "1rem";}?>; vertical-align: top;">
+            <?php if($ACTION_PLAN != "")
+            {echo $ACTION_PLAN;} 
+            else {echo "-";} ?>
           </td>
         </tr>
     </table>

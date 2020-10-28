@@ -4,7 +4,7 @@
         <div class="col-md-6">
           <form class="needs-validation border p-5 rounded bg-white shadow-lg" novalidate method="POST" action="<?php echo base_url('auth/login_action'); ?>">
             <h4 class="mb-3"><b>Sign in</b></h4>
-
+            <?= $this->session->flashdata('message'); ?>
             <div class="mb-3">
               <label for="nik"> <b>NIK/NIP</b></label>
               <input
@@ -42,7 +42,7 @@
             <p class="text-center my-4">Atau</p>
 
             <a
-              href="<?php echo base_url('external'); ?>"
+              href="<?php echo base_url('eksternal'); ?>"
               class="btn btn-outline-danger btn-lg btn-block"
               >Peserta Eksternal</a
             >
