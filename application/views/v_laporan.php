@@ -9,6 +9,7 @@
     border: 1px solid black;
     border-collapse: collapse;
     padding: 10px;
+    overflow: hidden;
   }
   </style>
 </head>
@@ -139,8 +140,12 @@
         </b>
       </td>
       <tr>
-        <td style="height:450px; vertical-align: top;">
-          <?php echo $BACKGROUND ?>
+        <td style="height:<?php if($BACKGROUND != "")
+        {echo "auto";}
+        else {echo "1rem";}?>; vertical-align: top;">
+          <?php if($BACKGROUND != "")
+          {echo $BACKGROUND;} 
+          else {echo "-";} ?>
         </td>
       </tr>
     </table>
@@ -158,7 +163,7 @@
         </b>
       </td>
       <tr>
-        <td style="height:450px; vertical-align: top;">
+        <td style="height:auto; vertical-align: top;">
           <?php echo $RESULT ?>
         </td>
       </tr>

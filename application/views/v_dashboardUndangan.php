@@ -1,15 +1,21 @@
     <main>
       <div class="container mt-5">
         <div class="row p-3 shadow-sm rounded bg-white my-3">
-          <h3>
-            <b>Beranda </b>
-          </h3>
-        </div>
-        <div class="row p-3 shadow-sm rounded bg-white my-3">
-          <a href="<?php echo base_url('meetpic'); ?>" class="btn btn-outline-danger"
-            >Penanggung Jawab</a
-          >
-          <a href="" class="btn btn-danger">Undangan</a>
+          <div class="col">
+            <div>
+              <h3>
+              <b>Beranda </b>
+              </h3>
+            </div>
+            <div>
+              <hr>
+              <a href="<?php echo base_url('meetpic'); ?>" class="btn btn-outline-danger"
+                >Penanggung Jawab</a
+              >
+              <a href="" class="btn btn-danger">Undangan</a>
+            </div>
+          </div>
+          
         </div>
 
         <div class="row justify-content-center pt-1 shadow-sm rounded bg-white">
@@ -21,6 +27,7 @@
                     class="form-control col-sm-8"
                     type="search"
                     placeholder="Cari Agenda Rapat"
+                    value="<?php if(isset($keyword)) {echo $keyword;}?>"
                     aria-label="Search"
                     name="keyword"
                   />
@@ -108,6 +115,7 @@
 
             <div class="row p-3">
               <div class="table-responsive">
+                <?= $this->session->flashdata('message'); ?>
                 <table class="table table-striped">
                   <thead>
                     <tr>
@@ -141,9 +149,11 @@
                         </a>
                       </td>
                       <td>
-                        <button class="btn btn-outline-danger px-2 py-1">
-                          <i class="fas fa-download"></i>
-                        </button>
+                        <a href="<?php echo base_url('meetpic/download_rapat').'/'.$val->ID_RAPAT ?>" target="_blank">
+                          <button class="btn btn-outline-danger px-2 py-1">
+                            <i class="fas fa-download"></i>
+                          </button>
+                        </a>
                       </td>
                     </tr>
                     <?php endforeach ?>

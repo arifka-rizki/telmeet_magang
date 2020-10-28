@@ -9,7 +9,7 @@
                 Terima kasih atas kehadiran anda. Data presensi anda telah
                 tersimpan dalam sistem.
               </p>
-              <a href="<?= base_url('external'); ?>" class="btn btn-danger text-center mt-3">
+              <a href="<?= base_url('eksternal'); ?>" class="btn btn-danger text-center mt-3">
                 <span class="m-1"><i class="fas fa-plus"></i></span>
                 Tambah Presensi Baru
               </a>

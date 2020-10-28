@@ -1,7 +1,7 @@
 <main>
       <div class="container mt-5">
         <div class="row p-3 shadow-sm rounded bg-white my-3">
-          <h3><b><?php echo $button?></b></h3>
+          <h3><b><?php echo $page_title?></b></h3>
         </div>
 
         <div class="row justify-content-center pt-1 shadow-sm rounded bg-white">
@@ -50,77 +50,97 @@
 
                   <div class="d-block my-3">
                     <h6 class="mb-3"><b>Tipe Rapat*</b></h6>
-                    <div class="custom-control custom-radio">
+                    <div class="custom-control custom-checkbox">
                       <input
                         id="review"
-                        name="TIPE_RAPAT"
-                        type="radio"
+                        name="TIPE_RAPAT[]"
+                        type="checkbox"
                         class="custom-control-input"
                         value="Review" 
-                        <?php if ( $TIPE_RAPAT=="Review") echo "checked"; ?> 
+                        <?php if(isset($TIPE_RAPAT)){
+                          if( preg_match('/Review/i', $TIPE_RAPAT)){
+                            echo "checked";
+                          }
+                        } ?> 
                         required
                       />
                       <label class="custom-control-label" for="review"
                         >Review
                       </label>
                     </div>
-                    <div class="custom-control custom-radio">
+                    <div class="custom-control custom-checkbox">
                       <input
                         id="koordinasi"
-                        name="TIPE_RAPAT"
-                        type="radio"
+                        name="TIPE_RAPAT[]"
+                        type="checkbox"
                         class="custom-control-input"
                         value="Koordinasi" 
-                        <?php if ( $TIPE_RAPAT=="Koordinasi") echo "checked"; ?>
+                        <?php if(isset($TIPE_RAPAT)){
+                          if( preg_match('/Koordinasi/i', $TIPE_RAPAT)){
+                            echo "checked";
+                          }
+                        } ?> 
                         required
                       />
                       <label class="custom-control-label" for="koordinasi"
                         >Koordinasi
                       </label>
                     </div>
-                    <div class="custom-control custom-radio">
+                    <div class="custom-control custom-checkbox">
                       <input
                         id="briefing"
-                        name="TIPE_RAPAT"
-                        type="radio"
+                        name="TIPE_RAPAT[]"
+                        type="checkbox"
                         class="custom-control-input"
                         value="Briefing" 
-                        <?php if ( $TIPE_RAPAT=="Briefing") echo "checked"; ?>
+                        <?php if(isset($TIPE_RAPAT)){
+                          if( preg_match('/Briefing/i', $TIPE_RAPAT)){
+                            echo "checked";
+                          }
+                        } ?> 
                         required
                       />
                       <label class="custom-control-label" for="briefing"
                         >Briefing
                       </label>
                     </div>
-                    <div class="custom-control custom-radio">
+                    <div class="custom-control custom-checkbox">
                       <input
                         id="decision"
-                        name="TIPE_RAPAT"
-                        type="radio"
+                        name="TIPE_RAPAT[]"
+                        type="checkbox"
                         class="custom-control-input"
                         value="Decision Making" 
-                        <?php if ( $TIPE_RAPAT=="Decision Making") echo "checked"; ?>
+                        <?php if(isset($TIPE_RAPAT)){
+                          if( preg_match('/Decision Making/i', $TIPE_RAPAT)){
+                            echo "checked";
+                          }
+                        } ?> 
                         required
                       />
                       <label class="custom-control-label" for="decision"
                         >Decision Making
                       </label>
                     </div>
-                    <div class="custom-control custom-radio">
+                    <div class="custom-control custom-checkbox">
                       <input
                         id="other"
-                        name="TIPE_RAPAT"
-                        type="radio"
+                        name="TIPE_RAPAT[]"
+                        type="checkbox"
                         class="custom-control-input"
                         value="Other" 
-                        <?php if ( $TIPE_RAPAT=="Other") echo "checked"; ?>
+                        <?php if(isset($TIPE_RAPAT)){
+                          if( preg_match('/Other/i', $TIPE_RAPAT)){
+                            echo "checked";
+                          }
+                        } ?> 
                         required
                       />
                       <label class="custom-control-label" for="other"
                         >Other
                       </label>
                     </div>
-                    <?php echo form_error('TIPE_RAPAT', '<p class = "alert alert-danger" role="alert">', '</p>'); ?>
+                    <?php echo form_error('TIPE_RAPAT[]', '<p class = "alert alert-danger" role="alert">', '</p>'); ?>
                   </div>
 
                   <div class="mb-3">
@@ -165,7 +185,7 @@
 
                   <div class="row">
                     <div class="col mb-3">
-                      <label for="waktuMulai"><b>Waktu Mulai* (AM/PM)</b></label>
+                      <label for="waktuMulai"><b>Waktu Mulai*</b></label>
                       <input
                         type="time"
                         min="00-00-00"
@@ -184,7 +204,7 @@
                       <?php echo form_error('WAKTU_MULAI', '<p class = "alert alert-danger" role="alert">', '</p>'); ?>
                     </div>
                     <div class="col mb-3">
-                      <label for="waktuSelesai"><b>Waktu Selesai* (AM/PM)</b></label>
+                      <label for="waktuSelesai"><b>Waktu Selesai*</b></label>
                       <input
                         type="time"
                         min="00-00-00"
@@ -281,7 +301,7 @@
                     type="submit"
                   >
                
-                  <?php echo $button ?>
+                  <?php echo $page_title ?>
                   </button>
                 </div>
               </div>

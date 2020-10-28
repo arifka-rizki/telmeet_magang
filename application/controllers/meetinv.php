@@ -14,7 +14,6 @@ class meetinv extends CI_Controller {
         $this->load->model('m_rapat');
         $this->load->model('m_users');      
         $this->load->library('upload');
-    	//$this->load->library('datatables');
     }
 
     public function index(){
@@ -28,19 +27,19 @@ class meetinv extends CI_Controller {
         $this->load->view('templates/footer');
     }
 
-    public function add_meet(){
-        $data['page_title'] = 'Tambah Rapat';
+    // public function add_meet(){
+    //     $data['page_title'] = 'Tambah Rapat';
 
-        $this->load->view('templates/header', $data);
-        $this->load->view('templates/navbar');
-        $this->load->view('v_addmeet');
-        $this->load->view('templates/copyright');
-        $this->load->view('templates/footer');
-    }
+    //     $this->load->view('templates/header', $data);
+    //     $this->load->view('templates/navbar');
+    //     $this->load->view('v_addmeet');
+    //     $this->load->view('templates/copyright');
+    //     $this->load->view('templates/footer');
+    // }
     
     public function detail($id){
         $row = $this->m_rapat->get_by_id($id);
-        $data_pic = $this->m_users->get_by_id($row->NIK_PIC);
+        $data_pic = $this->m_users->get_by_nik($row->NIK_PIC);
         
         if ($row) {
             if($this->m_rapat->get_data_peserta_rapat($this->session->userdata("nik"),$row->ID_RAPAT))
@@ -50,7 +49,7 @@ class meetinv extends CI_Controller {
             else $button = TRUE;
 
             $data = array(
-                'page_title' => 'Detail Rapat' . $row->NAMA_RAPAT,
+                'page_title' => 'Detail Rapat ' . $row->NAMA_RAPAT,
                 'show_button' => $button,
                 'ID_RAPAT' => $row->ID_RAPAT,
                 'NIK_PIC' => $row->NIK_PIC,
@@ -75,7 +74,7 @@ class meetinv extends CI_Controller {
             $this->load->view('templates/copyright');
             $this->load->view('templates/footer');
         } else {
-            $this->session->set_flashdata('message', 'Record Not Found');
+            $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Rapat Tidak Ditemukan</div>');
             redirect(site_url('meetinv'));
         }
     }
@@ -85,6 +84,7 @@ class meetinv extends CI_Controller {
         $keyword = $this->input->post('keyword',TRUE);
         $data['data']    =   $this->m_rapat->search_inv($keyword,$this->session->userdata("nik"));
         $data['page_title'] ='Dashboard Undangan';
+        $data['keyword'] = $keyword;
 
         $this->load->view('templates/header', $data);
         $this->load->view('templates/navbar');
@@ -111,7 +111,7 @@ class meetinv extends CI_Controller {
             
             if($row)
             {
-                $data_pic = $this->m_users->get_by_id($row->NIK_PIC);
+                $data_pic = $this->m_users->get_by_nik($row->NIK_PIC);
     
                 if($this->m_rapat->get_data_peserta_rapat($this->session->userdata("nik"),$row->ID_RAPAT)||$user == $row->NIK_PIC)
                 {
@@ -145,7 +145,7 @@ class meetinv extends CI_Controller {
                 $this->load->view('templates/copyright');
                 $this->load->view('templates/footer');
             }else {
-                $this->session->set_flashdata('message', 'Record Not Found');
+                $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Rapat Tidak Ditemukan</div>');
                 redirect(site_url('meetinv'));
             }
         }
@@ -175,6 +175,7 @@ class meetinv extends CI_Controller {
             );
                     
             $this->m_rapat->join_rapat($data);
+            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Presensi Berhasil</div>');
             redirect(site_url('meetinv'));
         }
         else 

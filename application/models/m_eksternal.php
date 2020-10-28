@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class m_external extends CI_Model {
+class m_eksternal extends CI_Model {
 
     function check_meet($where){
         $this->db->select('*');
